@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Departments - Orumba North LGA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Slab:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/global-theme.css">
+    <link rel="stylesheet" href="/static/css/glassmorphism.css">
+    <link rel="stylesheet" href="/static/css/header-enhancements.css">
+    <link rel="stylesheet" href="/static/css/departments.css">
+</head>
+<body>
+{% include '_header.html' %}
+
+<main class="departments-section">
+    <!-- Hero Section -->
+    <section class="departments-hero fade-in-up">
+        <div class="dept-hero-content glass-hero">
+            <h1>Departments & Services</h1>
+            <p>ICT • Finance • HR • Engineering • Agriculture • More</p>
+        </div>
+    </section>
+
+    <!-- Departments Grid -->
+    <section class="departments-grid container">
+        <h2 class="fade-in-up">Our Departments</h2>
+        
+        <!-- ICT -->
+        <div class="dept-card glass-card fade-in-up" data-dept="ICT">
+fill="#22c55e"
+                <rect x="10" y="15" width="60" height="40" rx="8" fill="rgba(255,255,255,0.1)"/>
+                <rect x="18" y="23" width="44" height="8" rx="4" fill="#fff"/>
+                <rect x="18" y="35" width="44" height="8" rx="4" fill="#fff"/>
+                <circle cx="25" y="52" r="3" fill="#fff" opacity="0.8"/>
+                <circle cx="55" y="52" r="3" fill="#fff" opacity="0.8"/>
+                <rect x="12" y="17" width="56" height="36" rx="6" fill="none" stroke="#fff" stroke-width="2" opacity="0.3"/>
+            </svg>
+            <h3>ICT Department</h3>
+            <p>Digital transformation, e-governance, website management, data systems</p>
+            <div>
+                <img src="/static/images/orumbamember7.jpg" alt="ICT HOD" class="hod-avatar">
+                <h6 class="hod-name">Mr. Tech Lead</h6>
+                <small class="hod-email">ict@orumba.gov.ng</small>
+            </div>
+        </div>
+
+        <!-- Finance -->
+        <div class="dept-card glass-card fade-in-up" data-dept="Finance">
+            <svg class="dept-icon" viewBox="0 0 80 80" fill="#22c55e">
+                <rect x="15" y="20" width="50" height="35" rx="6" fill="rgba(255,255,255,0.1)"/>
+                <rect x="22" y="28" width="36" height="6" rx="3" fill="#fff"/>
+                <circle cx="28" y="38" r="3" fill="#fff"/>
+                <circle cx="52" y="38" r="3" fill="#fff"/>
+                <path d="M25 45 Q40 48 55 45 L55 55 L25 55 Z" fill="#fff"/>
+                <rect x="17" y="22" width="46" height="31" rx="4" fill="none" stroke="#fff" stroke-width="2" opacity="0.4"/>
+            </svg>
+            <h3>Finance</h3>
+            <p>Budget planning, revenue collection, financial reporting, treasury management</p>
+            <div>
+                <img src="/static/images/orumbamember8.jpg" alt="Finance HOD" class="hod-avatar">
+                <h6 class="hod-name">Mrs. Finance Director</h6>
+                <small class="hod-email">finance@orumba.gov.ng</small>
+            </div>
+        </div>
+
+        <!-- HR/Admin -->
+        <div class="dept-card glass-card fade-in-up" data-dept="HR">
+            <svg class="dept-icon" viewBox="0 0 80 80" fill="#22c55e">
+                <circle cx="25" cy="25" r="12" fill="rgba(255,255,255,0.1)"/>
+                <circle cx="55" cy="25" r="12" fill="rgba(255,255,255,0.1)"/>
+                <path d="M25 37 Q25 45 25 50" stroke="#fff" stroke-width="3" fill="none"/>
+                <path d="M55 37 Q55 45 55 50" stroke="#fff" stroke-width="3" fill="none"/>
+                <rect x="15" y="55" width="50" height="12" rx="6" fill="#fff"/>
+                <circle cx="25" cy="22" r="2" fill="#fff"/>
+                <circle cx="55" cy="22" r="2" fill="#fff"/>
+                <circle cx="40" cy="40" r="15" fill="rgba(255,255,255,0.1)"/>
+            </svg>
+            <h3>HR/Admin</h3>
+            <p>Staff recruitment, training, welfare, general administration</p>
+            <div>
+                <img src="/static/images/orumbamember9.jpg" alt="HR HOD" class="hod-avatar">
+                <h6 class="hod-name">Mr. HR Manager</h6>
+                <small class="hod-email">hr@orumba.gov.ng</small>
+            </div>
+        </div>
+
+        <!-- Engineering -->
+        <div class="dept-card glass-card fade-in-up" data-dept="Engineering">
+            <svg class="dept-icon" viewBox="0 0 80 80" fill="#22c55e">
+                <rect x="10" y="20" width="60" height="40" rx="4" fill="rgba(255,255,255,0.1)"/>
+                <rect x="20" y="30" width="40" height="6" rx="2" fill="#fff"/>
+                <circle cx="25" y="45" r="4" fill="#fff"/>
+                <circle cx="55" y="45" r="4" fill="#fff"/>
+                <path d="M25 55 L55 55 M40 45 L40 55" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+                <rect x="12" y="22" width="56" height="36" rx="2" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.4"/>
+            </svg>
+            <h3>Engineering</h3>
+            <p>Road construction, drainage systems, public works projects</p>
+            <div>
+                <img src="/static/images/orumbamember10.jpg" alt="Eng HOD" class="hod-avatar">
+                <h6 class="hod-name">Eng. Project Lead</h6>
+                <small class="hod-email">engineering@orumba.gov.ng</small>
+            </div>
+        </div>
+
+        <!-- Agriculture -->
+        <div class="dept-card glass-card fade-in-up" data-dept="Agriculture">
+            <svg class="dept-icon" viewBox="0 0 80 80" fill="#22c55e">
+                <rect x="15" y="25" width="50" height="35" rx="8" fill="rgba(255,255,255,0.1)"/>
+                <path d="M20 20 Q30 15 40 20 Q50 25 60 20" stroke="#fff" stroke-width="4" fill="none"/>
+                <circle cx="25" y="35" r="3" fill="#fff"/>
+                <circle cx="55" y="35" r="3" fill="#fff"/>
+                <rect x="30" y="45" width="20" height="10" rx="2" fill="#fff"/>
+                <path d="M22 42 L58 42" stroke="#fff" stroke-width="2"/>
+            </svg>
+            <h3>Agriculture</h3>
+            <p>Farmer training, crop extension services, market linkages</p>
+            <div>
+                <img src="/static/images/orumbamember11.jpg" alt="Agri HOD" class="hod-avatar">
+                <h6 class="hod-name">Mr. Agri Director</h6>
+                <small class="hod-email">agriculture@orumba.gov.ng</small>
+            </div>
+        </div>
+
+        <!-- Tourism -->
+        <div class="dept-card glass-card fade-in-up" data-dept="Tourism">
+            <svg class="dept-icon" viewBox="0 0 80 80" fill="#22c55e">
+                <circle cx="40" cy="25" r="15" fill="rgba(255,255,255,0.1)"/>
+                <path d="M25 35 Q40 30 55 35" stroke="#fff" stroke-width="3" fill="none"/>
+                <circle cx="30" y="45" r="4" fill="#fff"/>
+                <circle cx="50" y="45" r="4" fill="#fff"/>
+                <path d="M35 55 Q40 60 45 55" stroke="#fff" stroke-width="2" fill="none"/>
+                <rect x="20" y="20" width="40" height="10" rx="2" fill="rgba(255,215,0,0.3)"/>
+            </svg>
+            <h3>Tourism</h3>
+            <p>Cultural promotion, event management, heritage preservation</p>
+            <div>
+                <img src="/static/images/orumbamember12.jpg" alt="Tourism HOD" class="hod-avatar">
+                <h6 class="hod-name">Ms. Tourism Manager</h6>
+                <small class="hod-email">tourism@orumba.gov.ng</small>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Modal -->
+    <div id="deptModal" class="dept-modal">
+        <div class="glass-card modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="modal-header">
+                <h2 id="modalTitle"></h2>
+            </div>
+            <div class="modal-description" id="modalDesc"></div>
+            <div class="modal-actions">
+                <a href="#" class="modal-btn modal-btn-primary" id="modalEmail">
+                    <span>📧</span> Send Email
+                </a>
+                <a href="/government" class="modal-btn">👥 Leadership</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% include '_footer.html' %}
+
+<script>
+const deptsData = {
+    'ICT': {
+        title: 'ICT Department',
+        desc: 'Digital transformation, e-governance platforms, website development, cybersecurity, and data management systems.',
+        email: 'ict@orumba.gov.ng'
+    },
+    'Finance': {
+        title: 'Finance Department',
+        desc: 'Annual budgeting, revenue collection, financial audits, treasury operations, and grant management.',
+        email: 'finance@orumba.gov.ng'
+    },
+    'HR': {
+        title: 'HR/Admin Department',
+        desc: 'Staff recruitment, training programs, employee welfare, performance appraisals, and payroll management.',
+        email: 'hr@orumba.gov.ng'
+    },
+    'Engineering': {
+        title: 'Engineering Department',
+        desc: 'Road construction, drainage systems, bridge maintenance, and public building projects.',
+        email: 'engineering@orumba.gov.ng'
+    },
+    'Agriculture': {
+        title: 'Agriculture Department',
+        desc: 'Farmer training workshops, crop extension services, agricultural loans, and market linkages.',
+        email: 'agriculture@orumba.gov.ng'
+    },
+    'Tourism': {
+        title: 'Tourism Department',
+        desc: 'Cultural festival organization, heritage site preservation, and tourism promotion campaigns.',
+        email: 'tourism@orumba.gov.ng'
+    }
+};
+
+// Enhanced modal functionality
+document.querySelectorAll('.dept-card').forEach(card => {
+    card.addEventListener('click', () => {
+        const dept = card.dataset.dept;
+        const data = deptsData[dept];
+        if (data) {
+            document.getElementById('modalTitle').textContent = data.title;
+            document.getElementById('modalDesc').textContent = data.desc;
+            document.getElementById('modalEmail').href = `mailto:${data.email}`;
+            document.getElementById('deptModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+    });
+});
+
+// Modal controls
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('deptModal').addEventListener('click', (e) => {
+    if (e.target.classList.contains('dept-modal')) closeModal();
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+});
+
+function closeModal() {
+    document.getElementById('deptModal').style.display = 'none';
+    document.body.style.overflow = '';
+}
+
+// Scroll animations with stagger
+function handleScroll() {
+    const reveals = document.querySelectorAll('.fade-in-up');
+    reveals.forEach((el, index) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+            setTimeout(() => el.classList.add('animate'), index * 150);
+        }
+    });
+}
+
+window.addEventListener('scroll', handleScroll);
+window.addEventListener('load', handleScroll);
+
+// Parallax hero
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const hero = document.querySelector('.departments-hero');
+    if (hero) {
+        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+    }
+});
+</script>
+</body>
+</html>

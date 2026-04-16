@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Events - Orumba North LGA</title>
+    <link rel="stylesheet" href="/static/css/glassmorphism.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Slab:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/global-theme.css">
+    <link rel="stylesheet" href="/static/css/header-enhancements.css">
+</head>
+<body>
+{% include '_header.html' %}
+
+<main>
+    <!-- Events Hero -->
+    <section class="hero fade-in-up" style="height: 70vh; position: relative; overflow: hidden; background: linear-gradient(135deg, rgba(0,100,0,0.8) 0%, rgba(34,197,94,0.7) 100%), url('/static/images/orumba-header-bakground-image2.jpg');">
+        <div class="glass-hero" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 90%;">
+            <h1 style="font-size: 4.5rem; background: linear-gradient(135deg, white, #f0f9ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Upcoming Events</h1>
+            <p style="font-size: 1.5rem; color: rgba(255,255,255,0.95); margin: 1rem 0 2.5rem;">Join our community activities and stay informed</p>
+        </div>
+    </section>
+
+    <!-- Events Calendar Grid -->
+    <section class="events-section fade-in-up container" style="padding: 6rem 0;">
+        <div class="events-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; max-width: 1200px; margin: 0 auto;">
+            
+            <!-- Event 1 -->
+            <div class="glass-card event-card fade-in-up" style="position: relative; cursor: pointer; height: 420px;">
+                <div style="position: absolute; top: 2rem; left: 2rem; z-index: 2;">
+                    <div class="event-date" style="background: linear-gradient(135deg, #22c55e, #16a34a); color: white; padding: 1.5rem; border-radius: 20px; text-align: center; min-width: 100px; box-shadow: 0 10px 30px rgba(34,197,94,0.4);">
+                        <div style="font-size: 2rem; font-weight: 800; line-height: 1;">15</div>
+                        <div style="font-size: 0.9rem; opacity: 0.9; text-transform: uppercase;">APR</div>
+                    </div>
+                </div>
+                <div style="position: absolute; bottom: 2rem; left: 2rem; right: 2rem; z-index: 2;">
+                    <h3 style="color: white; font-size: 1.8rem; margin-bottom: 1rem; font-weight: 700;">Budget Implementation Workshop</h3>
+                    <p style="color: rgba(255,255,255,0.9); line-height: 1.6; margin-bottom: 2rem;">Stakeholder engagement session to discuss 2024 budget implementation strategy and community priorities.</p>
+                    <div class="countdown" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <div class="count-item" style="text-align: center; min-width: 60px;">
+                            <div class="count-num" style="font-size: 2.5rem; font-weight: 800; color: #22c55e;">3</div>
+                            <div class="count-label" style="font-size: 0.85rem; color: rgba(255,255,255,0.8); text-transform: uppercase;">Days</div>
+                        </div>
+                        <div class="count-item" style="text-align: center; min-width: 60px;">
+                            <div class="count-num" style="font-size: 2.5rem; font-weight: 800; color: #22c55e;">14</div>
+                            <div class="count-label" style="font-size: 0.85rem; color: rgba(255,255,255,0.8); text-transform: uppercase;">Hours</div>
+                        </div>
+                        <div class="count-item" style="text-align: center; min-width: 60px;">
+                            <div class="count-num" style="font-size: 2.5rem; font-weight: 800; color: #22c55e;">25</div>
+                            <div class="count-label" style="font-size: 0.85rem; color: rgba(255,255,255,0.8); text-transform: uppercase;">Mins</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(34,197,94,0.95), rgba(16,163,74,0.95)); border-radius: 24px; opacity: 0.9; z-index: 1;"></div>
+            </div>
+
+            <!-- Event 2 -->
+            <div class="glass-card event-card fade-in-up" style="position: relative; cursor: pointer; height: 420px;" style="animation-delay: 0.1s;">
+                <div style="position: absolute; top: 2rem; left: 2rem; z-index: 2;">
+                    <div class="event-date" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 1.5rem; border-radius: 20px; text-align: center; min-width: 100px; box-shadow: 0 10px 30px rgba(245,158,11,0.4);">
+                        <div style="font-size: 2rem; font-weight: 800; line-height: 1;">22</div>
+                        <div style="font-size: 0.9rem; opacity: 0.9; text-transform: uppercase;">APR</div>
+                    </div>
+                </div>
+                <div style="position: absolute; bottom: 2rem; left: 2rem; right: 2rem; z-index: 2;">
+                    <h3 style="color: white; font-size: 1.8rem; margin-bottom: 1rem; font-weight: 700;">Road Project Launch</h3>
+                    <p style="color: rgba(255,255,255,0.9); line-height: 1.6; margin-bottom: 2rem;">Official groundbreaking ceremony for major road rehabilitation across Ihitenesa ward.</p>
+                    <div class="countdown" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <div class="count-item" style="text-align: center; min-width: 60px;">
+                            <div class="count-num" style="font-size: 2.5rem; font-weight: 800; color: #f59e0b;">10</div>
+                            <div class="count-label" style="font-size: 0.85rem; color: rgba(255,255,255,0.8); text-transform: uppercase;">Days</div>
+                        </div>
+                        <div class="count-item" style="text-align: center; min-width: 60px;">
+                            <div class="count-num" style="font-size: 2.5rem; font-weight: 800; color: #f59e0b;">8</div>
+                            <div class="count-label" style="font-size: 0.85rem; color: rgba(255,255,255,0.8); text-transform: uppercase;">Hours</div>
+                        </div>
+                        <div class="count-item" style="text-align: center; min-width: 60px;">
+                            <div class="count-num" style="font-size: 2.5rem; font-weight: 800; color: #f59e0b;">45</div>
+                            <div class="count-label" style="font-size: 0.85rem; color: rgba(255,255,255,0.8); text-transform: uppercase;">Mins</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(245,158,11,0.95), rgba(217,119,6,0.95)); border-radius: 24px; opacity: 0.9; z-index: 1;"></div>
+            </div>
+
+            <!-- Event 3 -->
+            <div class="glass-card event-card fade-in-up" style="position: relative; cursor: pointer; height: 420px;" style="animation-delay: 0.2s;">
+                <div style="position: absolute; top: 2rem; left: 2rem; z-index: 2;">
+                    <div class="event-date" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; padding: 1.5rem; border-radius: 20px; text-align: center; min-width: 100px; box-shadow: 0 10px 30px rgba(59,130,246,0.4);">
+                        <div style="font-size: 2rem; font-weight: 800; line-height: 1;">30</div>
+                        <div style="font-size: 0.9rem; opacity: 0.9; text-transform: uppercase;">APR</div>
+                    </div>
+                </div>
+                <div style="position: absolute; bottom: 2rem; left: 2rem; right: 2rem; z-index: 2;">
+                    <h3 style="color: white; font-size: 1.8rem; margin-bottom: 1rem; font-weight: 700;">Health & Wellness Fair</h3>
+                    <p style="color: rgba(255,255,255,0.9); line-height: 1.6; margin-bottom: 2rem;">Free medical screening, fitness workshops, and health education programs for all residents.</p>
+                    <div class="countdown" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <div class="count-item" style="text-align: center; min-width: 60px;">
+                            <div class="count-num" style="font-size: 2.5rem; font-weight: 800; color: #3b82f6;">18</div>
+                            <div class="count-label" style="font-size: 0.85rem; color: rgba(255,255,255,0.8); text-transform: uppercase;">Days</div>
+                        </div>
+                        <div class="count-item" style="text-align: center; min-width: 60px;">
+                            <div class="count-num" style="font-size: 2.5rem; font-weight: 800; color: #3b82f6;">12</div>
+                            <div class="count-label" style="font-size: 0.85rem; color: rgba(255,255,255,0.8); text-transform: uppercase;">Hours</div>
+                        </div>
+                        <div class="count-item" style="text-align: center; min-width: 60px;">
+                            <div class="count-num" style="font-size: 2.5rem; font-weight: 800; color: #3b82f6;">30</div>
+                            <div class="count-label" style="font-size: 0.85rem; color: rgba(255,255,255,0.8); text-transform: uppercase;">Mins</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(59,130,246,0.95), rgba(29,78,216,0.95)); border-radius: 24px; opacity: 0.9; z-index: 1;"></div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% include '_footer.html' %}
+
+<script>
+    // Event countdowns
+    function updateCountdowns() {
+        const now = new Date().getTime();
+        const events = [
+            {target: '2024-04-15T09:00:00', daysEl: '.count-num:nth-of-type(1)', hoursEl: '.count-num:nth-of-type(2)', minsEl: '.count-num:nth-of-type(3)'},
+            {target: '2024-04-22T10:00:00', daysEl: '.event-card:nth-child(2) .count-num:nth-of-type(1)', hoursEl: '.event-card:nth-child(2) .count-num:nth-of-type(2)', minsEl: '.event-card:nth-child(2) .count-num:nth-child(3)'},
+            {target: '2024-04-30T08:00:00', daysEl: '.event-card:nth-child(3) .count-num:nth-of-type(1)', hoursEl: '.event-card:nth-child(3) .count-num:nth-of-type(2)', minsEl: '.event-card:nth-child(3) .count-num:nth-of-type(3)'}
+        ];
+        events.forEach(event => {
+            const targetDate = new Date(event.target).getTime();
+            const distance = targetDate - now;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            if (event.daysEl) event.daysEl.textContent = days;
+            if (event.hoursEl) event.hoursEl.textContent = hours;
+            if (event.minsEl) event.minsEl.textContent = minutes;
+        });
+    }
+    
+    setInterval(updateCountdowns, 60000);
+    updateCountdowns();
+</script>
+</body>
+</html>
+

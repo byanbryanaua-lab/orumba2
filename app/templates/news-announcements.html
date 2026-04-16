@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News & Announcements</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/glassmorphism.css">
+    <link rel="stylesheet" href="/static/css/global-theme.css">
+    <link rel="stylesheet" href="/static/css/header-enhancements.css">
+</head>
+<body>
+    {% include '_header.html' %}
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-bg" style="background: url('/static/images/orumba-header-bakground-image3.jpg'); background-size: cover;"></div>
+        <div class="glass-hero">
+            <h1 class="fade-in-up">📰 News Feed</h1>
+            <p class="fade-in-up">Official announcements and press releases</p>
+        </div>
+    </section>
+
+    <!-- Dynamic News from API -->
+    <section class="container" style="padding: 6rem 2rem;">
+        <div id="dynamicNews" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; max-width: 1400px; margin: 0 auto;">
+            <!-- JS populates from /api/public/posts -->
+        </div>
+        <div style="text-align: center; margin-top: 4rem;">
+            <button class="btn" style="background: rgba(255,255,255,0.2); color: white; padding: 1.5rem 3rem; font-size: 1.1rem; border-radius: 50px; border: 1px solid rgba(255,255,255,0.3);" onclick="loadMoreNews()">Load More</button>
+        </div>
+    </section>
+
+    {% include '_footer.html' %}
+
+    <script>
+        let allNews = [];
+        let page = 0;
+        const pageSize = 9;
+
+        async function loadNews() {
+            try {
+                const response = await fetch('/api/public/posts');
+                const data = await response.json();
+                if (data.status === 'success') {
+                    allNews = data.posts;
+                    renderNews(allNews.slice(0, pageSize));
+                }
+            } catch (e) {
+                document.getElementById('dynamicNews').innerHTML = '<div class="glass-card" style="text-align: center; padding: 4rem;"><p>News loading temporarily unavailable</p></div>';
+            }
+        }
+
+        function renderNews(posts) {
+            const container = document.getElementById('dynamicNews');
+            container.innerHTML = '';
+
+            posts.forEach(post => {
+                const card = document.createElement('div');
+                card.className = 'glass-card fade-in-up';
+                card.style.padding = '2.5rem';
+                card.innerHTML = `
+                    <div style="color: #22c55e; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem;">${post.username || 'Admin'}</div>
+                    <h2 style="margin-bottom: 1.5rem; line-height: 1.3;">${post.title || post.content.substring(0, 60) + '...'}</h2>
+                    <p style="line-height: 1.7; margin-bottom: 2rem;">${post.content.substring(0, 200)}...</p>
+                    <div style="font-size: 0.9rem; color: #666;">${new Date(post.published_at || Date.now()).toLocaleDateString()}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function loadMoreNews() {
+            page++;
+            const nextPosts = allNews.slice(page * pageSize, (page + 1) * pageSize);
+            renderNews([...document.querySelectorAll('.glass-card').length > 0 ? Array.from(document.querySelectorAll('.glass-card')) : [], ...nextPosts]);
+        }
+
+        window.addEventListener('load', loadNews);
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.fade-in-up').forEach((el, i) => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) el.classList.add('animate');
+            });
+        });
+    </script>
+</body>
+</html>

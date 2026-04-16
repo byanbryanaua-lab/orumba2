@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Orumba North LGA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/glassmorphism.css">
+    <link rel="stylesheet" href="/static/css/global-theme.css">
+    <link rel="stylesheet" href="/static/css/header-enhancements.css">
+    <style>
+        .about-hero { height: 100vh; position: relative; overflow: hidden; }
+        .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; padding: 6rem 2rem; max-width: 1400px; margin: 0 auto; }
+        .about-card { padding: 3rem 2rem; text-align: center; }
+        .about-icon { font-size: 4rem; margin-bottom: 1.5rem; }
+        .about-h2 { font-size: 2rem; margin-bottom: 1rem; }
+        .page-link { background: rgba(255,255,255,0.2); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; display: inline-block; margin-top: 1rem; transition: all 0.3s; }
+        .page-link:hover { background: rgba(255,255,255,0.3); transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+    {% include '_header.html' %}
+
+    <!-- Hero - Exact Home Style -->
+    <section class="about-hero">
+        <div class="hero-bg" style="background: url('/static/images/orumba-header-bakground-image.jpg'); background-size: cover; background-position: center;"></div>
+        <div class="glass-hero">
+            <h1 class="fade-in-up" style="animation-delay: 0.2s;">About Orumba North</h1>
+            <p class="fade-in-up" style="animation-delay: 0.4s;">Discover our rich history, vibrant culture, and dedicated leadership</p>
+        </div>
+    </section>
+
+    <!-- About Overview Grid -->
+    <section class="about-grid">
+        <div class="about-card glass-card fade-in-up">
+            <div class="about-icon">📜</div>
+            <h2 class="about-h2">History</h2>
+            <p>From pre-colonial roots to modern local governance - a timeline of progress and resilience.</p>
+            <a href="/about/history" class="page-link">Explore History</a>
+        </div>
+
+        <div class="about-card glass-card fade-in-up" style="animation-delay: 0.1s;">
+            <div class="about-icon">🎭</div>
+            <h2 class="about-h2">Landmarks & Culture</h2>
+            <p>Rich cultural heritage with sacred sites, festivals, and traditions.</p>
+            <a href="/about/landmarks-culture" class="page-link">Discover Culture</a>
+        </div>
+
+        <div class="about-card glass-card fade-in-up" style="animation-delay: 0.2s;">
+            <div class="about-icon">👥</div>
+            <h2 class="about-h2">People of Orumba North</h2>
+            <p>Diverse communities united by shared values, ambition, and community spirit.</p>
+            <a href="/about/people" class="page-link">Meet Our People</a>
+        </div>
+    </section>
+
+    {% include '_footer.html' %}
+
+    <script>
+        // Scroll animations
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.fade-in-up').forEach((el, index) => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) el.classList.add('animate');
+            });
+        });
+    </script>
+</body>
+</html>

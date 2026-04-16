@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Article - Orumba North LGA Newsroom</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/glassmorphism.css">
+    <link rel="stylesheet" href="/static/css/global-theme.css">
+    <link rel="stylesheet" href="/static/css/header-enhancements.css">
+</head>
+<body>
+    {% include '_header.html' %}
+
+    <main id="full-post-main">
+        <section class="hero" style="height: 50vh;">
+            <div class="hero-bg" style="background: linear-gradient(135deg, rgba(0,100,0,0.8), rgba(34,197,94,0.6)); background-size: cover;"></div>
+        </section>
+        <div id="full-post-content" style="text-align: center; padding: 2rem;">
+            <div class="glass-card" style="max-width: 900px; margin: 0 auto; padding: 3rem; position: relative;">
+                <p style="color: #ccc;">Loading full article...</p>
+            </div>
+        </div>
+    </main>
+
+    {% include '_footer.html' %}
+
+    <script>
+        async function loadFullPost() {
+            const postId = window.location.pathname.split('/').pop();
+            try {
+                const response = await fetch(`/api/public/post/${postId}`);
+                const data = await response.json();
+                if (data.status === 'success') {
+                    document.getElementById('full-post-content').innerHTML = `
+                        <section class="container" style="padding: 4rem 2rem;">
+                            <article class="glass-card" style="padding: 0; overflow: hidden; border-radius: 24px; max-width: 900px; margin: 0 auto;">
+                                <div class="hero-article" style="height: 60vh; position: relative; background: linear-gradient(135deg, rgba(0,100,0,0.8), rgba(34,197,94,0.6)); display: flex; align-items: flex-end; padding: 3rem;">
+                                    <div style="position: relative; z-index: 2; color: white;">
+                                        <span style="background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Featured Article</span>
+                                        <h1 style="font-size: 3rem; margin: 1rem 0 0.5rem 0; line-height: 1.2; color: white;">${data.post.title || 'Article'}</h1>
+                                        <div style="font-size: 1.1rem; opacity: 0.95;">
+                                            ${data.post.username || 'Newsroom'} • ${new Date(data.post.published_at || Date.now()).toLocaleDateString()}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="padding: 4rem 3rem; background: white;">
+                                    <div style="font-size: 1.2rem; line-height: 1.8; color: #333; max-width: 800px; margin: 0 auto;">${data.post.content}</div>
+                                    <div style="margin-top: 3rem; text-align: center;">
+                                        <a href="/newsroom" class="btn" style="background: rgba(34,197,94,0.8); color: white; padding: 1.2rem 3rem; font-size: 1.1rem; font-weight: 600; border-radius: 50px; text-decoration: none; box-shadow: 0 4px 15px rgba(34,197,94,0.3);">← Back to Newsroom</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </section>
+                    `;
+                } else {
+                    document.getElementById('full-post-content').innerHTML = `
+                        <section class="container" style="padding: 4rem 2rem; text-align: center;">
+                            <div class="glass-card" style="padding: 4rem; max-width: 600px; margin: 0 auto;">
+                                <h2 style="color: white;">Article Not Found</h2>
+                                <p style="color: rgba(255,255,255,0.8);">The requested article could not be loaded.</p>
+                                <a href="/newsroom" class="btn" style="background: rgba(34,197,94,0.8); color: white; padding: 1rem 2.5rem; border-radius: 30px; text-decoration: none; display: inline-block; margin-top: 1rem;">← Back to Newsroom</a>
+                            </div>
+                        </section>
+                    `;
+                }
+            } catch (e) {
+                document.getElementById('full-post-content').innerHTML = `
+                    <section class="container" style="padding: 4rem 2rem; text-align: center;">
+                        <div class="glass-card" style="padding: 4rem; max-width: 600px; margin: 0 auto;">
+                            <h2 style="color: white;">Error Loading Article</h2>
+                            <p style="color: rgba(255,255,255,0.8);">Please try again later.</p>
+                            <a href="/newsroom" class="btn" style="background: rgba(34,197,94,0.8); color: white; padding: 1rem 2.5rem; border-radius: 30px; text-decoration: none; display: inline-block; margin-top: 1rem;">← Back to Newsroom</a>
+                        </div>
+                    </section>
+                `;
+            }
+        }
+
+        window.addEventListener('load', loadFullPost);
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+[
+  {
+    "username": "testuser",
+    "password": "13d249f2cb4127b40cfa757866850278793f814ded3c587fe5889e889a7a9f6c",
+    "id": 1,
+    "role": "citizen",
+    "name": "testuser",
+    "email": "",
+    "avatar": ""
+  },
+  {
+    "username": "Ken",
+    "password": "6cadf2f0f34dc55acde751c0f5e4b7cae56694f304c41bbd77ae351421884008",
+    "id": 2,
+    "role": "citizen",
+    "name": "Ken",
+    "email": "",
+    "avatar": ""
+  },
+  {
+    "username": "general admin",
+    "password": "ba29e7d8905f7481e418057f683f971a149fe390d4ebb0c86efa1fb633263e34",
+    "id": 3,
+    "role": "citizen",
+    "name": "general admin",
+    "email": "",
+    "avatar": ""
+  },
+  {
+    "username": "dwightcraig90@gmail.com",
+    "password": "0c2c9d639e4bc58811eb1a960afdd525b6b66584b2ddec9878ee291f132c794c",
+    "id": 1,
+    "role": "citizen",
+    "name": "dwightcraig90@gmail.com",
+    "email": "",
+    "avatar": ""
+  }
+]

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create Event</title>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/css/glassmorphism.css">
+    <link rel="stylesheet" href="/static/css/global-theme.css">
+    <link rel="stylesheet" href="/static/css/header-enhancements.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding-top: 100px;
+            padding-bottom: 2rem;
+            min-height: 100vh;
+        }
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .form-container {
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #34495e;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(52,73,94,0.3);
+            border-radius: 12px;
+            font-size: 1rem;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52,152,219,0.1);
+            background: white;
+        }
+        #editor-container {
+            height: 300px;
+            margin-bottom: 1rem;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .ql-toolbar, .ql-container {
+            border-radius: 12px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        button {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52,152,219,0.3);
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(52,152,219,0.4);
+        }
+    </style>
+</head>
+<body>
+    {% include '_header.html' %}
+    <main>
+        <h1>Create New Event</h1>
+        <div class="form-container">
+            <form id="eventForm">
+                <div class="form-group">
+                    <label for="event-title">Event Title</label>
+                    <input type="text" id="event-title" name="title" placeholder="Enter event title" required />
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="event-date">Date & Time</label>
+                        <input type="datetime-local" id="event-date" name="datetime" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="event-location">Location</label>
+                        <input type="text" id="event-location" name="location" placeholder="Event location" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="event-description">Description</label>
+                    <div id="editor-container"></div>
+                </div>
+                <div class="form-group">
+                    <label for="event-image">Banner Image (Optional)</label>
+                    <input type="file" id="event-image" name="image" accept="image/*" />
+                </div>
+                <button type="submit">Create Event & Publish to Newsroom</button>
+            </form>
+        </div>
+    </main>
+    {% include '_footer.html' %}
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+        var quill = new Quill('#editor-container', {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, false] }],
+                    ['bold', 'italic', 'underline'],
+                    ['link', 'image'],
+                    [{ 'list': 'ordered'},{ 'list': 'bullet' }],
+                    ['clean']
+                ]
+            },
+            placeholder: 'Describe the event...'
+        });
+
+        document.getElementById('eventForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                title: document.getElementById('event-title').value,
+                datetime: document.getElementById('event-date').value,
+                location: document.getElementById('event-location').value,
+                description: quill.root.innerHTML,
+                status: 'published'
+            };
+            
+            const imageFile = document.getElementById('event-image').files[0];
+            if (imageFile) {
+                const uploadForm = new FormData();
+                uploadForm.append('file', imageFile);
+                const uploadRes = await fetch('/api/upload/image', {
+                    method: 'POST',
+                    body: uploadForm
+                });
+                const uploadData = await uploadRes.json();
+                if (uploadData.status === 'success') {
+                    formData.image = uploadData.url;
+                }
+            }
+            
+            const res = await fetch('/api/profile/events', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+            
+            const data = await res.json();
+            if (data.status === 'success') {
+                alert('Event created and published to Newsroom Upcoming Events!');
+                window.location.href = '/profile/events';
+            } else {
+                alert('Error: ' + data.message);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Hub - Orumba North LGA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/glassmorphism.css">
+    <link rel="stylesheet" href="/static/css/global-theme.css">
+    <link rel="stylesheet" href="/static/css/header-enhancements.css">
+</head>
+<body>
+    {% include '_header.html' %}
+
+    <!-- Hero - Exact Match -->
+    <section class="hero">
+        <div class="hero-bg" style="background: url('/static/images/orumba-header-bakground-image3.jpg'); background-size: cover;"></div>
+        <div class="glass-hero">
+            <h1 class="fade-in-up">📰 News & Announcements</h1>
+            <p class="fade-in-up">Latest updates from Orumba North Local Government</p>
+        </div>
+    </section>
+
+    <!-- News Masonry Grid -->
+    <section class="container" style="padding: 6rem 2rem;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; max-width: 1400px; margin: 0 auto;">
+            <div class="glass-card fade-in-up" style="padding: 2.5rem;">
+                <div style="color: #22c55e; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem;">📢 ADMINISTRATION</div>
+                <h2>2025 Budget Approval</h2>
+                <p>N2.5 billion budget approved focusing on roads, health centers, and youth empowerment programs across all 10 wards.</p>
+                <div style="font-size: 0.9rem; color: #666; margin-top: 1.5rem;">Jan 15, 2025 • Chairman</div>
+            </div>
+
+            <div class="glass-card fade-in-up" style="animation-delay: 0.1s; padding: 2.5rem;">
+                <div style="color: #22c55e; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem;">🏥 HEALTH</div>
+                <h2>Free Medical Outreach</h2>
+                <p>5,000+ residents receive free healthcare during weekend outreach. Next event scheduled for all wards in February.</p>
+                <div style="font-size: 0.9rem; color: #666; margin-top: 1.5rem;">Jan 12, 2025 • Health Dept</div>
+            </div>
+
+            <div class="glass-card fade-in-up" style="animation-delay: 0.2s; padding: 2.5rem;">
+                <div style="color: #22c55e; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem;">🛣️ INFRASTRUCTURE</div>
+                <h2>Road Rehabilitation Begins</h2>
+                <p>25km of strategic roads flagged off. Phase 1 targets Ihitenesa-Amaetiti, Nanka-Ufuma corridors.</p>
+                <div style="font-size: 0.9rem; color: #666; margin-top: 1.5rem;">Jan 10, 2025 • Works Dept</div>
+            </div>
+
+            <div class="glass-card fade-in-up" style="animation-delay: 0.3s; padding: 2.5rem;">
+                <div style="color: #22c55e; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem;">💡 ICT</div>
+                <h2>Digital Skills Training</h2>
+                <p>300 youths complete Google Digital Training. Certificates awarded, startup funding announced.</p>
+                <div style="font-size: 0.9rem; color: #666; margin-top: 1.5rem;">Jan 8, 2025 • ICT Dept</div>
+            </div>
+
+            <div class="glass-card fade-in-up" style="animation-delay: 0.4s; padding: 2.5rem;">
+                <div style="color: #22c55e; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem;">🌾 AGRICULTURE</div>
+                <h2>Yam Festival Preparations</h2>
+                <p>Iri Ji committee inaugurated. Cultural festival to showcase farming innovations, traditional wrestling.</p>
+                <div style="font-size: 0.9rem; color: #666; margin-top: 1.5rem;">Jan 5, 2025 • Agriculture</div>
+            </div>
+
+            <div class="glass-card fade-in-up" style="animation-delay: 0.5s; padding: 2.5rem;">
+                <div style="color: #22c55e; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem;">📚 EDUCATION</div>
+                <h2>Scholarship Awards</h2>
+                <p>150 students receive N5M scholarships for university education. Special focus on STEM courses.</p>
+                <div style="font-size: 0.9rem; color: #666; margin-top: 1.5rem;">Jan 3, 2025 • Education Dept</div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 4rem;">
+            <a href="#" class="btn" style="background: rgba(255,255,255,0.2); color: white; padding: 1.5rem 3rem; font-size: 1.2rem; border-radius: 50px;">Load More News</a>
+        </div>
+    </section>
+
+    {% include '_footer.html' %}
+
+    <script>
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.fade-in-up').forEach((el, i) => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) el.classList.add('animate');
+            });
+        });
+    </script>
+</body>
+</html>

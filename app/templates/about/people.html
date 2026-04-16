@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People - Orumba North</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/glassmorphism.css">
+    <link rel="stylesheet" href="/static/css/global-theme.css">
+    <link rel="stylesheet" href="/static/css/header-enhancements.css">
+    <style>
+        .people-hero { 
+            height: 80vh; 
+            position: relative; 
+            overflow: hidden; 
+            margin-top: 120px; /* Header below nav */
+        }
+        .people-stats { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 2rem; 
+            padding: 6rem 2rem; 
+        }
+        .people-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+            gap: 2.5rem; 
+            padding: 6rem 2rem; 
+            max-width: 1400px; 
+            margin: 0 auto; 
+        }
+        .people-card { 
+            padding: 3rem; 
+            text-align: center; 
+            background: rgba(255,255,255,0.1) !important; 
+            backdrop-filter: blur(35px) !important;
+            border: 1.5px solid rgba(255,255,255,0.3) !important;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.2) !important;
+        }
+        .people-icon {
+            width: 90px !important;
+            height: 90px !important;
+            margin: 0 auto 2.5rem auto !important;
+            opacity: 0.95 !important;
+        }
+        .stat-number { 
+            font-size: 4rem; 
+            font-weight: 900; 
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body>
+    {% include '_header.html' %}
+
+    <!-- Hero - Lowered below nav -->
+    <section class="people-hero">
+        <div class="hero-bg" style="background: url('/static/images/orumba-header-bakground-image.jpg'); background-size: cover; background-position: center;"></div>
+        <div class="glass-hero">
+            <h1 class="fade-in-up">People of Orumba North</h1>
+            <p class="fade-in-up">200K+ resilient residents, united traditions, cosmopolitan spirit</p>
+        </div>
+    </section>
+
+    <!-- Transparent Glass Community Stats -->
+    <section class="people-stats">
+        <div class="glass-card people-card fade-in-up">
+            <div class="stat-number">200K+</div>
+            <h3>Population</h3>
+            <p>Thriving communities across 10 wards</p>
+        </div>
+        <div class="glass-card people-card fade-in-up" style="animation-delay: 0.1s;">
+            <div class="stat-number">10</div>
+            <h3>Wards</h3>
+            <p>Diverse representation and local governance</p>
+        </div>
+        <div class="glass-card people-card fade-in-up" style="animation-delay: 0.2s;">
+            <div class="stat-number">80%</div>
+            <h3>Agriculture</h3>
+            <p>Primary occupation - yam capital of Anambra</p>
+        </div>
+        <div class="glass-card people-card fade-in-up" style="animation-delay: 0.3s;">
+            <div class="stat-number">95%</div>
+            <h3>Literacy</h3>
+            <p>High education levels, mission schools legacy</p>
+        </div>
+    </section>
+
+    <!-- Transparent Glass Community Life Grid -->
+    <section class="people-grid">
+        <div class="glass-card people-card fade-in-up">
+            <svg class="people-icon" viewBox="0 0 24 24" fill="#22c55e">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+            <h2>Family & Community</h2>
+            <p>Strong extended family systems, age-grade associations, communal labor (Nso-ani). Umuneze system preserves traditions while embracing modernity.</p>
+        </div>
+
+        <div class="glass-card people-card fade-in-up" style="animation-delay: 0.1s;">
+            <svg class="people-icon" viewBox="0 0 24 24" fill="#22c55e">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            <h2>Religion & Beliefs</h2>
+            <p>Christian majority (95%) with Anglican/Catholic dominance from early missions. Traditional religion preserved in festivals, oaths, ancestral veneration.</p>
+        </div>
+
+        <div class="glass-card people-card fade-in-up" style="animation-delay: 0.2s;">
+            <svg class="people-icon" viewBox="0 0 24 24" fill="#22c55e">
+                <path d="M12 17c3.31 0 6-2.69 6-6 0-.98-.23-1.9-.64-2.73l1.54-1.54c.56.92 0.89 2 0.89 3.27 0 3.31-2.69 6-6 6-.98 0-1.9-.23-2.73-.64l-1.54 1.54C10.1 16.77 11.02 17 12 17zm0-12c-3.31 0-6 2.69-6 6 0 .98.23 1.9.64 2.73l-1.54 1.54c-.56-.92-.89-2-.89-3.27 0-3.31 2.69-6 6-6 .98 0 1.9.23 2.73.64l1.54-1.54C13.9 5.23 12.98 5 12 5z"/>
+            </svg>
+            <h2>Traditional Rulers</h2>
+            <p>Igwe-in-Councils, Eze systems, Ozo titled men. Nri influence lingers in ritual kingship, title-taking ceremonies, dispute resolution.</p>
+        </div>
+
+        <div class="glass-card people-card fade-in-up" style="animation-delay: 0.3s;">
+            <svg class="people-icon" viewBox="0 0 24 24" fill="#22c55e">
+                <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 1.99-.89 1.99-2L22 8c0-1.11-.89-2-2-2zm0 12H4V8h16v10zm-9.5-2c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zM13.5 8c.83 0 1.5-.67 1.5-1.5S14.33 5 13.5 5s-1.5.67-1.5 1.5S12.67 8 13.5 8z"/>
+            </svg>
+            <h2>Modern Professions</h2>
+            <p>Teachers, civil servants, traders, farmers, entrepreneurs. High diaspora remittances fuel development. Emerging tech/digital skills in youth.</p>
+        </div>
+    </section>
+
+    {% include '_footer.html' %}
+
+    <script>
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.fade-in-up').forEach((el, i) => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) el.classList.add('animate');
+            });
+        });
+    </script>
+</body>
+</html>

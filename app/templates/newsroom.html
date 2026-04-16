@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsroom - Orumba North LGA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/glassmorphism.css">
+    <link rel="stylesheet" href="/static/css/global-theme.css">
+    <link rel="stylesheet" href="/static/css/header-enhancements.css">
+</head>
+<body>
+    {% include '_header.html' %}
+
+    <!-- Hero - Ikeja Style Featured News -->
+    <section class="hero" style="height: 70vh;">
+        <div class="hero-bg" style="background: url('/static/images/orumba-header-bakground-image3.jpg'); background-size: cover;"></div>
+        <div class="glass-hero" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <h1 style="color: white; font-size: 3.5rem;">Newsroom</h1>
+            <p style="color: rgba(255,255,255,0.9); font-size: 1.3rem;">Official Press Releases & Media Updates</p>
+        </div>
+    </section>
+
+    <!-- Upcoming Events Carousel - Below Hero -->
+    <section class="events-section" style="padding: 4rem 2rem; background: linear-gradient(135deg, rgba(34,197,94,0.05) 0%, transparent 100%);">
+        <div class="container" style="max-width: 1200px; margin: 0 auto;">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: #000; background: linear-gradient(135deg, #22c55e, #16a34a); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Upcoming Events</h2>
+            <div class="glass-card event-carousel" style="overflow: hidden; border-radius: 24px;">
+                <div class="carousel-track" id="events-carousel" style="display: flex;"></div>
+            </div>
+        </div>
+        <script>
+            async function loadEventsCarousel() {
+                try {
+                    const res = await fetch('/api/public/events');
+                    const data = await res.json();
+                    if (data.status === 'success' && data.events.length > 0) {
+                        const track = document.getElementById('events-carousel');
+                        track.innerHTML = data.events.map(event => `
+                            <div class="carousel-slide" style="min-width: 100%; flex-shrink: 0;">
+                                ${event.image ? `<img src="${event.image}" alt="${event.title}" style="width: 100%; height: 400px; object-fit: cover;">` : '<div style="height: 400px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;"></div>'}
+                                <div style="padding: 2rem; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.7);">
+                                    <h3 style="font-size: 2rem; margin-bottom: 0.5rem;">${event.title}</h3>
+                                    <p style="font-size: 1.2rem; margin-bottom: 1rem;">${new Date(event.date || Date.now()).toLocaleDateString()}</p>
+                                    <p style="font-size: 1.1rem; opacity: 0.95;">${event.location}</p>
+                                </div>
+                            </div>
+                        `).join('');
+                        
+                        let index = 0;
+                        setInterval(() => {
+                            index = (index + 1) % data.events.length;
+                            const offset = -index * 100;
+                            track.style.transform = `translateX(${offset}%)`;
+                        }, 3000);
+                    } else {
+                        document.getElementById('events-carousel').innerHTML = '<div style="padding: 4rem; text-align: center; color: #666;"><h3>No upcoming events</h3><p>Check back soon for community updates</p></div>';
+                    }
+                } catch(e) {
+                    console.log('Events loading...');
+                    document.getElementById('events-carousel').innerHTML = '<div style="padding: 4rem; text-align: center; color: #666;">Loading events...</div>';
+                }
+            }
+            window.addEventListener('load', loadEventsCarousel);
+        </script>
+    </section>
+        <div class="hero-bg" style="background: url('/static/images/orumba-header-bakground-image3.jpg'); background-size: cover;"></div>
+        <div class="glass-hero" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <h1 style="color: white; font-size: 3.5rem;">Newsroom</h1>
+            <p style="color: rgba(255,255,255,0.9); font-size: 1.3rem;">Official Press Releases & Media Updates</p>
+        </div>
+    </section>
+
+    <!-- Featured Article (ikeja.lg.gov.ng style) -->
+    <section class="container" style="padding: 4rem 2rem;">
+        <div class="glass-card" style="padding: 0; overflow: hidden; border-radius: 24px;">
+            <div style="height: 60%; background: linear-gradient(135deg, rgba(0,100,0,0.8), rgba(34,197,94,0.6)); position: relative;">
+                <div style="position: absolute; bottom: 2rem; left: 2rem; color: white;">
+                    <span style="background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Breaking News</span>
+                    <h2 style="font-size: 2.8rem; margin: 1rem 0 0.5rem 0; line-height: 1.2;">Executive Council Approves ₦2.8B Development Budget</h2>
+                    <p style="font-size: 1.1rem; opacity: 0.95; max-width: 600px;">Prioritizing infrastructure, healthcare, and education across all 10 wards...</p>
+                </div>
+            </div>
+            <div style="padding: 3rem;">
+                <div style="color: #666; font-size: 0.95rem; margin-bottom: 1.5rem;">Orumba North LGA • January 20, 2025</div>
+                <p style="line-height: 1.8; font-size: 1.1rem; color: #333; margin-bottom: 2rem;">The Executive Council chaired by the Chairman has approved the 2025 fiscal budget of ₦2.8 billion with 45% allocation to capital projects including road networks, health centers, and school renovations.</p>
+                <div style="display: flex; gap: 1rem;">
+                    <a href="#" class="btn" style="background: rgba(34,197,94,0.8); color: white; padding: 1rem 2rem; border-radius: 30px;">Full Press Release</a>
+                    <a href="#" style="color: #666; text-decoration: none; font-weight: 500;">Share on Social</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent News Grid (ikeja.lg.gov.ng layout) -->
+    <section class="container" style="padding: 4rem 2rem 6rem;">
+        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 4rem; color: #000;">Recent Updates</h2>
+        <div id="dynamic-news-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem;">
+            <!-- Dynamic content loaded here -->
+        </div>
+        <div style="text-align: center; margin-top: 4rem;">
+            <button id="load-more-btn" class="btn" style="background: rgba(34,197,94,0.8); color: white; padding: 1.2rem 3rem; font-size: 1.1rem; font-weight: 600; border-radius: 50px; border: none; cursor: pointer; transition: all 0.3s ease;" onclick="loadMoreNews()">Load More News</button>
+        </div>
+    </section>
+
+    <!-- Sidebar Categories (ikeja.lg.gov.ng style) -->
+    <section class="container" style="padding-bottom: 6rem;">
+        <div style="display: grid; grid-template-columns: 3fr 1fr; gap: 4rem; max-width: 1400px; margin: 0 auto;">
+            <div>
+                <h3 style="color: #000; margin-bottom: 2rem;">Categories</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+                    <span style="background: rgba(34,197,94,0.1); color: #22c55e; padding: 0.75rem 1.5rem; border-radius: 25px; font-weight: 500;">Administration (12)</span>
+                    <span style="background: rgba(34,197,94,0.1); color: #22c55e; padding: 0.75rem 1.5rem; border-radius: 25px; font-weight: 500;">Health (8)</span>
+                    <span style="background: rgba(34,197,94,0.1); color: #22c55e; padding: 0.75rem 1.5rem; border-radius: 25px; font-weight: 500;">Infrastructure (15)</span>
+                </div>
+            </div>
+            <div>
+                <h3 style="color: #000; margin-bottom: 2rem;">Quick Links</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 1rem;"><a href="#" style="color: #333; text-decoration: none;">← Latest News</a></li>
+                    <li style="margin-bottom: 1rem;"><a href="#" style="color: #333; text-decoration: none;">Submit Story</a></li>
+                    <li style="margin-bottom: 1rem;"><a href="#" style="color: #333; text-decoration: none;">Media Contacts</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    {% include '_footer.html' %}
+
+    <script>
+        let allNews = [];
+        let currentPage = 0;
+        const pageSize = 3;
+
+        async function loadNews() {
+            try {
+                const response = await fetch('/api/public/posts');
+                const data = await response.json();
+                if (data.status === 'success') {
+                    allNews = data.posts;
+                    renderNews(allNews.slice(0, pageSize));
+                } else {
+                    renderFallbackNews();
+                }
+            } catch (e) {
+                renderFallbackNews();
+            }
+        }
+
+        function renderNews(posts) {
+            const container = document.getElementById('dynamic-news-grid');
+            posts.forEach(post => {
+                const card = document.createElement('div');
+                card.className = 'glass-card fade-in-up';
+                card.style.padding = '2.5rem';
+                card.style.height = '100%';
+                card.innerHTML = `
+                    <div style="color: #22c55e; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem;">${post.username || 'Newsroom'}</div>
+                    <h3 style="margin-bottom: 1rem; color: white;">${post.title || 'News Update'}</h3>
+                    <p style="color: rgba(255,255,255,0.9); line-height: 1.7; margin-bottom: 2rem;">${(post.content || '').substring(0, 200)}...</p>
+                    <div style="color: #ccc; font-size: 0.9rem;">${new Date(post.published_at || Date.now()).toLocaleDateString()}</div>
+                    <a href="/post/${post.id}" style="background: linear-gradient(135deg, #22c55e, #16a34a); color: white; padding: 0.8rem 2rem; text-decoration: none; border-radius: 25px; font-weight: 600; display: inline-block; margin-top: 1rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(34,197,94,0.3);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(34,197,94,0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(34,197,94,0.3)'">Read Full Article</a>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+
+        function renderFallbackNews() {
+            const container = document.getElementById('dynamic-news-grid');
+            container.innerHTML = `
+                <div class="glass-card" style="padding: 2.5rem; text-align: center;">
+                    <p style="color: #ccc;">News loading temporarily unavailable. Check back soon!</p>
+                </div>
+            `;
+        }
+
+        function loadMoreNews() {
+            currentPage++;
+            const start = currentPage * pageSize;
+            const end = start + pageSize;
+            const nextPosts = allNews.slice(start, end);
+            if (nextPosts.length > 0) {
+                renderNews(nextPosts);
+            } else {
+                document.getElementById('load-more-btn').style.display = 'none';
+            }
+        }
+
+        // Scroll animations
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.fade-in-up').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight) el.classList.add('animate');
+            });
+        });
+
+        // Load on page ready
+        window.addEventListener('load', loadNews);
+    </script>
+</body>
+</html>

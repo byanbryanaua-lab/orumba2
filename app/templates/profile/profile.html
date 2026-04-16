@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Orumba North</title>
+    <link rel="stylesheet" href="/static/css/glassmorphism.css">
+    <link rel="stylesheet" href="/static/css/profile-glass.css">
+    <link rel="stylesheet" href="/static/css/global-theme.css">
+    <link rel="stylesheet" href="/static/css/header-enhancements.css">
+    <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"></script>
+</head>
+<body class="profile-page">
+    {% include '_header.html' %}
+    
+    <div class="profile-container">
+        <nav class="glass-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2 id="user-name">Loading...</h2>
+                <small id="user-role">Citizen</small>
+            </div>
+            <ul class="sidebar-nav">
+                <li><a href="#" data-section="dashboard" class="nav-link active"><span>📊</span> Dashboard</a></li>
+                <li><a href="#" data-section="posts"><span>📰</span> My Posts</a></li>
+                <li><a href="#" data-section="albums"><span>📸</span> Albums</a></li>
+                <li><a href="#" data-section="events"><span>📅</span> Events</a></li>
+                <li class="dropdown">
+                    <a href="#" data-section="create" class="nav-link"><span>➕</span> Create New ▼</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/create-post">📰 Create Post</a></li>
+                        <li><a href="/create-album">📸 Create Album</a></li>
+                    </ul>
+                </li>
+                {% if session.role == 'admin' %}
+                <li><a href="#" data-section="admin"><span>⚙️</span> Admin</a></li>
+                {% endif %}
+                <li><a href="#" data-section="settings"><span>⚙️</span> Settings</a></li>
+                <li><a href="#" id="logout-btn"><span>🚪</span> Logout</a></li>
+            </ul>
+        </nav>
+        
+        <main class="main-panel">
+            <!-- Dashboard -->
+            <div id="dashboard" class="section active">
+                <div class="glass-card">
+                    <h1>Welcome to your Dashboard</h1>
+                    <div class="stats-grid">
+                        <div class="stat-card glass-card">
+                            <div class="stat-number" id="stat-posts">0</div>
+                            <div class="stat-label">Posts</div>
+                        </div>
+                        <div class="stat-card glass-card">
+                            <div class="stat-number" id="stat-albums">0</div>
+                            <div class="stat-label">Albums</div>
+                        </div>
+                        <div class="stat-card glass-card">
+                            <div class="stat-number" id="stat-events">0</div>
+                            <div class="stat-label">Events</div>
+                        </div>
+                    </div>
+                    <div class="recent-activity glass-card">
+                        <h3>Recent Activity</h3>
+                        <ul id="activity-list"></ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- My Posts -->
+            <div id="posts" class="section">
+                <div class="glass-card">
+                    <div class="section-header">
+                        <h2>My Posts</h2>
+                        <button class="btn-glass" id="create-post-btn">+ New Post</button>
+                    </div>
+                    <div class="content-grid" id="posts-grid"></div>
+                </div>
+            </div>
+            
+            <!-- Albums -->
+            <div id="albums" class="section">
+                <div class="glass-card">
+                    <div class="section-header">
+                        <h2>My Albums</h2>
+                        <button class="btn-glass" id="create-album-btn">+ New Album</button>
+                    </div>
+                    <div class="content-grid" id="albums-grid"></div>
+                </div>
+            </div>
+            
+            <!-- Events -->
+            <div id="events" class="section">
+                <div class="glass-card">
+                    <div class="section-header">
+                        <h2>My Events</h2>
+                        <button class="btn-glass" id="create-event-btn">+ New Event</button>
+                    </div>
+                    <div class="content-grid" id="events-grid"></div>
+                </div>
+            </div>
+            
+            <!-- Create New -->
+            <div id="create" class="section">
+                <div class="glass-card quick-actions-container">
+                    <h2>Create New Content</h2>
+                    <div class="quick-actions">
+                        <a href="/create-post" class="action-card glass-card">
+                            <div class="action-icon">📰</div>
+                            <h3>New Post</h3>
+                        </a>
+                        <a href="/create-album" class="action-card glass-card">
+                            <div class="action-icon">📸</div>
+                            <h3>New Album</h3>
+                        </a>
+                        <a href="/create-event" class="action-card glass-card">
+                            <div class="action-icon">📅</div>
+                            <h3>New Event</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Settings -->
+            <div id="settings" class="section">
+                <div class="glass-card">
+                    <h2>Profile Settings</h2>
+                    <form class="glass-form" id="settings-form">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-input" id="user-name-input" placeholder="Your full name">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-input" id="user-email-input" placeholder="your@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Avatar</label>
+                            <input type="file" id="avatar-upload" accept="image/*">
+                            <div id="avatar-preview"></div>
+                        </div>
+                        <button type="submit" class="btn-glass full-width">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Post Editor Modal -->
+    <div id="post-modal" class="glass-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Create Post</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="post-form" class="glass-form">
+                <div class="form-group">
+                    <input type="text" class="form-input" id="post-title" placeholder="Post Title">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-textarea" id="post-content" rows="8" placeholder="Post content..."></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="file" id="post-image" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <select class="form-select" id="post-category">
+                        <option value="general">General</option>
+                        <option value="news">News</option>
+                        <option value="announcement">Announcement</option>
+                    </select>
+                </div>
+                <label>
+                    <input type="checkbox" id="post-publish" checked> Publish immediately
+                </label>
+                <button type="submit" class="btn-glass">Save Post</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Album/Event Modals similar structure -->
+    <div id="album-modal" class="glass-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create Album</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="album-form" class="glass-form">
+                <div class="form-group">
+                    <input type="text" class="form-input" id="album-title" placeholder="Album Title">
+                </div>
+                <div class="form-group">
+                    <input type="file" id="album-images" multiple accept="image/*">
+                    <div id="album-preview"></div>
+                </div>
+                <button type="submit" class="btn-glass">Create Album</button>
+            </form>
+        </div>
+    </div>
+    
+    <div id="event-modal" class="glass-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create Event</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="event-form" class="glass-form">
+                <div class="form-group">
+                    <input type="text" class="form-input" id="event-title" placeholder="Event Title">
+                </div>
+                <div class="form-group">
+                    <input type="datetime-local" class="form-input" id="event-datetime">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-input" id="event-location" placeholder="Location">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-textarea" id="event-description" rows="4" placeholder="Description"></textarea>
+                </div>
+                <input type="file" id="event-image" accept="image/*">
+                <button type="submit" class="btn-glass">Create Event</button>
+            </form>
+        </div>
+    </div>
+    
+    {% include '_footer.html' %}
+    <script src="/static/js/profile.js"></script>
+    <style>
+        .no-data { text-align: center; color: #666; padding: 2rem; font-style: italic; }
+        .status-badge { padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+        .status-badge.published { background: rgba(34,197,94,0.2); color: #10b981; }
+        .status-badge.draft { background: rgba(245,158,11,0.2); color: #f59e0b; }
+        .content-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; padding: 1rem 0; }
+        .content-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px 12px 0 0; }
+        .card-body { padding: 1.5rem; }
+        .card-actions { display: flex; gap: 0.5rem; margin-top: 1rem; }
+        .btn-glass { padding: 0.5rem 1rem; border: none; border-radius: 8px; cursor: pointer; font-size: 0.9rem; transition: 0.2s; }
+        .dropdown { position: relative; }
+        .dropdown.open .dropdown-menu { display: block; }
+        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-radius: 12px; min-width: 160px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); list-style: none; padding: 0.5rem 0; z-index: 100; }
+        .dropdown-menu li a { display: block; padding: 0.75rem 1rem; color: #374151; text-decoration: none; }
+        .dropdown-menu li a:hover { background: rgba(59,130,246,0.1); }
+    </style>
+</body>
+</html>
