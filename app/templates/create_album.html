@@ -1,129 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Create Album</title>
-  <link rel="stylesheet" href="/static/css/global-theme.css" />
-  <link rel="stylesheet" href="/static/css/header-enhancements.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
+  <meta name="description" content="Create a new photo album for Orumba North LGA.">
+  <title>Create Album — Orumba North LGA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/global-theme.css">
+  <link rel="stylesheet" href="/static/css/navbar.css">
+  <link rel="stylesheet" href="/static/css/mobile-global.css">
   <style>
+    :root { --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+
     body {
-      font-family: 'Roboto', sans-serif;
       background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
       background-attachment: fixed;
       min-height: 100vh;
-      padding-top: 100px;
+      padding-top: 80px;
       padding-bottom: 2rem;
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
     }
 
-    main {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
-    }
+    main { max-width: 800px; margin: 0 auto; padding: 1.5rem 1rem; }
 
     h1 {
-      color: var(--secondary-color);
+      color: #fff;
       text-align: center;
-      margin-bottom: 2rem;
-      font-size: 2.5rem;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      margin-bottom: 1.5rem;
+      font-size: clamp(1.6rem, 5vw, 2.5rem);
+      font-weight: 700;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
     }
 
     .form-container {
-      background: var(--glass-bg-strong);
+      background: rgba(255,255,255,0.08);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: var(--shadow-light);
-    }
-
-    .post-entry {
-      background: var(--glass-bg);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--glass-border);
-      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius-lg);
       padding: 1.5rem;
-      margin-bottom: 1.5rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
     }
 
+    .form-group { margin-bottom: 1.25rem; }
     label {
       display: block;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
       font-weight: 600;
-      color: var(--secondary-color);
+      color: #fff;
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
     }
-
     input[type="text"] {
       width: 100%;
-      padding: 0.75rem 1rem;
-      margin-bottom: 1rem;
+      padding: 0.7rem 0.9rem;
       font-size: 1rem;
-      border-radius: 8px;
-      border: 1px solid var(--glass-border);
-      background: var(--glass-bg);
-      color: var(--secondary-color);
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      font-family: var(--font-body);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      box-sizing: border-box;
     }
-
+    input[type="text"]::placeholder { color: rgba(255,255,255,0.45); }
     input[type="text"]:focus {
       outline: none;
-      border-color: var(--primary-color);
-      box-shadow: 0 0 0 3px rgba(0, 184, 148, 0.2);
+      border-color: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34,197,94,0.2);
     }
-
     input[type="file"] {
       width: 100%;
-      padding: 0.75rem;
-      border-radius: 8px;
-      border: 1px dashed var(--glass-border);
-      background: var(--glass-bg);
-      color: var(--secondary-color);
+      padding: 0.6rem;
+      border-radius: var(--radius);
+      border: 1.5px dashed rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.04);
+      color: #fff;
       cursor: pointer;
+      font-size: 0.9rem;
     }
-
     input[type="file"]::file-selector-button {
-      background: var(--primary-color);
-      color: var(--secondary-color);
+      background: #22c55e;
+      color: #fff;
       border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-right: 1rem;
-      transition: background 0.3s ease;
-    }
-
-    input[type="file"]::file-selector-button:hover {
-      background: var(--accent-color);
-    }
-
-    button {
-      background: var(--primary-color);
-      color: var(--secondary-color);
-      border: none;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      font-weight: 700;
+      padding: 0.5rem 0.9rem;
       border-radius: 8px;
       cursor: pointer;
-      display: inline-block;
-      margin: 0.5rem;
-      transition: all 0.3s ease;
-      box-shadow: var(--shadow-dark);
+      margin-right: 0.75rem;
+      font-weight: 600;
+      font-family: var(--font-body);
+      transition: background 0.25s ease;
     }
+    input[type="file"]::file-selector-button:hover { background: #16a34a; }
 
-    button:hover {
-      background: var(--accent-color);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 184, 148, 0.4);
+    .post-entry {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
     }
+    .post-entry-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+    .post-entry-title { font-size: 0.9rem; font-weight: 600; color: rgba(255,255,255,0.8); }
+    .remove-post {
+      background: rgba(239,68,68,0.2);
+      color: #ff6b6b;
+      border: 1px solid rgba(239,68,68,0.3);
+      padding: 0.35rem 0.7rem;
+      font-size: 0.8rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    .remove-post:hover { background: rgba(239,68,68,0.35); }
 
-    button[type="submit"] {
-      display: block;
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      font-family: var(--font-body);
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .btn-add {
+      background: rgba(34,197,94,0.15);
+      color: #22c55e;
+      border: 1.5px solid rgba(34,197,94,0.3);
+      padding: 0.65rem 1.1rem;
+      font-size: 0.9rem;
+    }
+    .btn-add:hover { background: rgba(34,197,94,0.25); transform: translateY(-1px); }
+    .btn-submit {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #fff;
+      padding: 0.85rem 1.5rem;
+      font-size: 1rem;
       width: 100%;
-      margin: 1rem 0 0 0;
+      margin-top: 0.5rem;
+      box-shadow: 0 8px 24px rgba(34,197,94,0.3);
+    }
+    .btn-submit:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(34,197,94,0.4);
+    }
+    .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+    .btn-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem; }
+
+    .status-msg {
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-align: center;
+      display: none;
+    }
+    .status-msg.success { display: block; background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.25); }
+    .status-msg.error { display: block; background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.25); }
+    .status-msg.info { display: block; background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.25); }
+
+    @media (max-width: 768px) {
+      body { padding-top: 75px; }
+      main { padding: 1.25rem 1rem; max-width: 100%; }
+      h1 { font-size: clamp(1.5rem, 6vw, 2rem); margin-bottom: 1.25rem; }
+      .form-container { padding: 1.25rem; border-radius: 18px; box-shadow: 0 6px 24px rgba(0,0,0,0.25); }
+      .form-group { margin-bottom: 1rem; }
+      label { font-size: 0.9rem; margin-bottom: 0.35rem; }
+      input[type="text"] { padding: 0.8rem 1rem; font-size: 16px; border-radius: var(--radius); }
+      input[type="file"] { padding: 0.75rem; font-size: 0.9rem; }
+      input[type="file"]::file-selector-button { padding: 0.55rem 0.85rem; font-size: 0.85rem; }
+      .post-entry { padding: 1.1rem; border-radius: var(--radius); margin-bottom: 1rem; }
+      .post-entry-title { font-size: 0.85rem; }
+      .remove-post { padding: 0.4rem 0.75rem; font-size: 0.8rem; min-height: 36px; }
+      .btn-add { width: 100%; padding: 0.75rem 1rem; font-size: 0.95rem; min-height: 48px; }
+      .btn-submit { padding: 0.9rem 1.25rem; font-size: 1rem; min-height: 52px; }
+    }
+
+    @media (max-width: 480px) {
+      body { padding-top: 70px; }
+      main { padding: 0.875rem 0.625rem; }
+      h1 { font-size: clamp(1.35rem, 6.5vw, 1.7rem); margin-bottom: 1rem; }
+      .form-container { padding: 1rem 0.875rem; border-radius: 14px; border: 1px solid rgba(255,255,255,0.12); }
+      .form-group { margin-bottom: 0.875rem; }
+      label { font-size: 0.85rem; }
+      input[type="text"] { padding: 0.85rem 0.875rem; font-size: 16px; border-radius: 10px; }
+      input[type="file"] { padding: 0.6rem; font-size: 0.85rem; }
+      input[type="file"]::file-selector-button { padding: 0.5rem 0.75rem; margin-right: 0.5rem; }
+      .post-entry { padding: 0.875rem; border-radius: 12px; margin-bottom: 0.875rem; }
+      .post-entry-header { margin-bottom: 0.6rem; }
+      .post-entry-title { font-size: 0.82rem; }
+      .remove-post { padding: 0.35rem 0.6rem; font-size: 0.75rem; min-height: 34px; }
+      .btn-add { padding: 0.7rem 0.875rem; font-size: 0.9rem; min-height: 48px; border-radius: 10px; }
+      .btn-submit { padding: 0.85rem 1rem; font-size: 0.95rem; min-height: 52px; border-radius: var(--radius); margin-top: 0.35rem; }
+      .btn-row { flex-direction: column; gap: 0.5rem; margin-top: 0.35rem; }
     }
   </style>
 </head>
@@ -133,106 +213,156 @@
     <h1>Create Album</h1>
     <div class="form-container">
       <form id="albumForm" enctype="multipart/form-data">
-        <div id="postsContainer">
-          <div class="post-entry">
-            <label>Caption:</label>
-            <input type="text" name="caption" placeholder="Enter image caption" />
-            <label>Image:</label>
-            <input type="file" name="image" accept="image/*" required />
-          </div>
+        <div class="form-group">
+          <label for="albumTitle">Album Title</label>
+          <input type="text" id="albumTitle" name="title" placeholder="e.g. Community Festival 2024" required />
         </div>
-        <button type="button" id="addPostBtn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true" focusable="false" style="vertical-align: middle; margin-right: 6px;">
-            <path d="M8 1a.5.5 0 0 1 .5.5v6.5H15a.5.5 0 0 1 0 1H8.5v6.5a.5.5 0 0 1-1 0V9.5H1a.5.5 0 0 1 0-1h6.5V1.5A.5.5 0 0 1 8 1z"/>
-          </svg>
-          Add Another Image
-        </button>
-        <button type="submit">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true" focusable="false" style="vertical-align: middle; margin-right: 6px;">
+
+        <div id="postsContainer"></div>
+
+        <div class="btn-row">
+          <button type="button" class="btn btn-add" id="addPostBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8 1a.5.5 0 0 1 .5.5v6.5H15a.5.5 0 0 1 0 1H8.5v6.5a.5.5 0 0 1-1 0V9.5H1a.5.5 0 0 1 0-1h6.5V1.5A.5.5 0 0 1 8 1z"/>
+            </svg>
+            Add Image
+          </button>
+        </div>
+
+        <button type="submit" class="btn btn-submit" id="submitBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
             <path d="M4 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H9.5L7 1H4zm3 4a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
-            <path d="M8 7a3 3 0 0 1 3 3v1H5v-1a3 3 0 0 1 3-3z"/>
           </svg>
           Create Album
         </button>
+        <div class="status-msg" id="statusMsg"></div>
       </form>
     </div>
   </main>
-  <script>
-    const baseUrl = window.location.origin;
 
-    document.getElementById('addPostBtn').addEventListener('click', () => {
-      const postsContainer = document.getElementById('postsContainer');
-      const newPost = document.createElement('div');
-      newPost.className = 'post-entry';
-      newPost.innerHTML = `
-        <label>Caption:</label>
-        <input type="text" name="caption" placeholder="Enter image caption" />
-        <label>Image:</label>
+  <script>
+    const postsContainer = document.getElementById('postsContainer');
+    const addPostBtn = document.getElementById('addPostBtn');
+    const albumForm = document.getElementById('albumForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusMsg = document.getElementById('statusMsg');
+    let postCount = 0;
+
+    function showStatus(text, type) {
+      statusMsg.textContent = text;
+      statusMsg.className = 'status-msg ' + type;
+    }
+
+    function clearStatus() {
+      statusMsg.className = 'status-msg';
+      statusMsg.textContent = '';
+    }
+
+    function createPostEntry() {
+      postCount++;
+      const div = document.createElement('div');
+      div.className = 'post-entry';
+      div.dataset.index = postCount;
+      div.innerHTML = `
+        <div class="post-entry-header">
+          <span class="post-entry-title">Image ${postCount}</span>
+          ${postCount > 1 ? `<button type="button" class="remove-post" onclick="removePostEntry(this)">Remove</button>` : ''}
+        </div>
+        <label>Caption</label>
+        <input type="text" name="caption" placeholder="Describe this image..." />
+        <label>Image File <span style="color:#f87171">*</span></label>
         <input type="file" name="image" accept="image/*" required />
       `;
-      postsContainer.appendChild(newPost);
+      postsContainer.appendChild(div);
+    }
+
+    function removePostEntry(btn) {
+      btn.closest('.post-entry').remove();
+      renumberEntries();
+    }
+
+    function renumberEntries() {
+      const entries = postsContainer.querySelectorAll('.post-entry');
+      entries.forEach((entry, idx) => {
+        entry.dataset.index = idx + 1;
+        entry.querySelector('.post-entry-title').textContent = 'Image ' + (idx + 1);
+      });
+      postCount = entries.length;
+    }
+
+    createPostEntry();
+
+    addPostBtn.addEventListener('click', () => {
+      createPostEntry();
+      const entries = postsContainer.querySelectorAll('.post-entry');
+      entries[entries.length - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
 
-    document.getElementById('albumForm').addEventListener('submit', async (e) => {
+    albumForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const form = e.target;
+      clearStatus();
+      submitBtn.disabled = true;
+      showStatus('Uploading images...', 'info');
 
+      const title = document.getElementById('albumTitle').value.trim();
+      const entries = albumForm.querySelectorAll('.post-entry');
       const captions = [];
       const images = [];
 
-      const postEntries = form.querySelectorAll('.post-entry');
-      for (const entry of postEntries) {
+      for (const entry of entries) {
         const captionInput = entry.querySelector('input[name="caption"]');
         const imageInput = entry.querySelector('input[name="image"]');
         if (imageInput.files.length === 0) {
-          alert('Please select an image for all posts.');
+          showStatus('Please select an image for every entry.', 'error');
+          submitBtn.disabled = false;
           return;
         }
-        captions.push(captionInput.value);
+        captions.push(captionInput.value.trim());
         images.push(imageInput.files[0]);
       }
 
-      // Upload images one by one and collect URLs
-      const uploadedImageUrls = [];
-      for (let i = 0; i < images.length; i++) {
-        const imageFormData = new FormData();
-        imageFormData.append('image', images[i]);
-        const res = await fetch(baseUrl + '/api/upload-image', {
-          method: 'POST',
-          body: imageFormData
-        });
-        const data = await res.json();
-        if (data.status !== 'success') {
-          alert('Image upload failed: ' + data.message);
-          return;
+      try {
+        const uploadedImageUrls = [];
+        for (let i = 0; i < images.length; i++) {
+          const fd = new FormData();
+          fd.append('file', images[i]);
+          const res = await fetch('/api/upload/image', { method: 'POST', body: fd });
+          const data = await res.json();
+          if (data.status !== 'success') {
+            showStatus('Image upload failed: ' + (data.message || 'Unknown error'), 'error');
+            submitBtn.disabled = false;
+            return;
+          }
+          uploadedImageUrls.push(data.url);
         }
-        uploadedImageUrls.push(data.url);
-      }
 
-      // Prepare album posts data
-      const albumPosts = uploadedImageUrls.map((url, idx) => ({
-        image_url: url,
-        caption: captions[idx] || '',
-        content: 'Image post' // placeholder content
-      }));
+        showStatus('Creating album...', 'info');
 
-      // Send album creation request
-      const response = await fetch(baseUrl + '/api/albums', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ posts: albumPosts })
-      });
-      const result = await response.json();
-      if (result.status === 'success') {
-        alert('Album created successfully!');
-        window.location.href = '/gallery';
-      } else {
-        alert('Failed to create album: ' + result.message);
+        const albumPosts = uploadedImageUrls.map((url, idx) => ({
+          image_url: url,
+          caption: captions[idx] || '',
+          content: 'Image post'
+        }));
+
+        const res = await fetch('/api/profile/albums', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: title, posts: albumPosts })
+        });
+        const result = await res.json();
+
+        if (result.status === 'success') {
+          showStatus('Album created successfully! Redirecting...', 'success');
+          setTimeout(() => { window.location.href = '/gallery'; }, 1200);
+        } else {
+          showStatus('Failed: ' + (result.message || 'Unknown error'), 'error');
+          submitBtn.disabled = false;
+        }
+      } catch (err) {
+        showStatus('Network error: ' + err.message, 'error');
+        submitBtn.disabled = false;
       }
     });
   </script>
-  <footer>
-    &copy; 2024 Orumba North. All rights reserved.
-  </footer>
 </body>
 </html>

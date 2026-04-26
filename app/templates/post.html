@@ -3,22 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Full Article - Orumba North LGA Newsroom</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/glassmorphism.css">
+    <meta name="description" content="Read the full article from Orumba North LGA Newsroom.">
+    <title>Article — Orumba North LGA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/global-theme.css">
-    <link rel="stylesheet" href="/static/css/header-enhancements.css">
+    <link rel="stylesheet" href="/static/css/navbar.css">
+    <link rel="stylesheet" href="/static/css/mobile-global.css">
+    <style>
+        .article-hero {
+            background: linear-gradient(135deg, rgba(0,80,0,0.9), rgba(34,197,94,0.8));
+            padding: 6rem 2rem 4rem;
+            margin-top: -75px;
+            padding-top: calc(75px + 4rem);
+            color: white;
+            text-align: center;
+        }
+        .article-hero .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .article-hero h1 {
+            font-size: var(--text-3xl);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .article-hero .meta { opacity: 0.9; font-size: var(--text-base); }
+
+        .article-body {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+        .article-body p {
+            color: #374151;
+            line-height: 1.8;
+            font-size: var(--text-lg);
+            margin-bottom: 1.5rem;
+        }
+        .article-body h2, .article-body h3 { color: #111827; margin: 2rem 0 1rem; }
+        .article-body blockquote {
+            border-left: 4px solid #22c55e;
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            color: #4b5563;
+            font-style: italic;
+            font-size: var(--text-lg);
+        }
+        .article-body img {
+            width: 100%;
+            border-radius: var(--radius-lg);
+            margin: 2rem 0;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #22c55e;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        @media (max-width: 768px) {
+            .article-hero { padding: 5rem 1.5rem 3rem; padding-top: calc(75px + 3rem); }
+            .article-hero h1 { font-size: var(--text-2xl); }
+            .article-body { padding: 2rem 1rem; }
+            .article-body p { font-size: var(--text-base); }
+        }
+    </style>
 </head>
 <body>
     {% include '_header.html' %}
 
     <main id="full-post-main">
-        <section class="hero" style="height: 50vh;">
-            <div class="hero-bg" style="background: linear-gradient(135deg, rgba(0,100,0,0.8), rgba(34,197,94,0.6)); background-size: cover;"></div>
-        </section>
-        <div id="full-post-content" style="text-align: center; padding: 2rem;">
-            <div class="glass-card" style="max-width: 900px; margin: 0 auto; padding: 3rem; position: relative;">
-                <p style="color: #ccc;">Loading full article...</p>
+        <div id="article-container">
+            <section class="article-hero">
+                <div class="container">
+                    <div class="badge">Featured Article</div>
+                    <h1 id="article-title">Loading Article...</h1>
+                    <div class="meta" id="article-meta">Please wait</div>
+                </div>
+            </section>
+            <div class="article-body">
+                <a href="/newsroom" class="back-link">&larr; Back to Newsroom</a>
+                <div id="article-content">
+                    <p>Fetching article content...</p>
+                </div>
             </div>
         </div>
     </main>
@@ -28,56 +110,41 @@
     <script>
         async function loadFullPost() {
             const postId = window.location.pathname.split('/').pop();
+            const container = document.getElementById('article-container');
             try {
                 const response = await fetch(`/api/public/post/${postId}`);
                 const data = await response.json();
                 if (data.status === 'success') {
-                    document.getElementById('full-post-content').innerHTML = `
-                        <section class="container" style="padding: 4rem 2rem;">
-                            <article class="glass-card" style="padding: 0; overflow: hidden; border-radius: 24px; max-width: 900px; margin: 0 auto;">
-                                <div class="hero-article" style="height: 60vh; position: relative; background: linear-gradient(135deg, rgba(0,100,0,0.8), rgba(34,197,94,0.6)); display: flex; align-items: flex-end; padding: 3rem;">
-                                    <div style="position: relative; z-index: 2; color: white;">
-                                        <span style="background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Featured Article</span>
-                                        <h1 style="font-size: 3rem; margin: 1rem 0 0.5rem 0; line-height: 1.2; color: white;">${data.post.title || 'Article'}</h1>
-                                        <div style="font-size: 1.1rem; opacity: 0.95;">
-                                            ${data.post.username || 'Newsroom'} • ${new Date(data.post.published_at || Date.now()).toLocaleDateString()}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="padding: 4rem 3rem; background: white;">
-                                    <div style="font-size: 1.2rem; line-height: 1.8; color: #333; max-width: 800px; margin: 0 auto;">${data.post.content}</div>
-                                    <div style="margin-top: 3rem; text-align: center;">
-                                        <a href="/newsroom" class="btn" style="background: rgba(34,197,94,0.8); color: white; padding: 1.2rem 3rem; font-size: 1.1rem; font-weight: 600; border-radius: 50px; text-decoration: none; box-shadow: 0 4px 15px rgba(34,197,94,0.3);">← Back to Newsroom</a>
-                                    </div>
-                                </div>
-                            </article>
-                        </section>
+                    const post = data.post;
+                    document.getElementById('article-title').textContent = post.title || 'Article';
+                    document.getElementById('article-meta').innerHTML = `
+                        ${post.username || 'Newsroom'} &middot; ${new Date(post.published_at || Date.now()).toLocaleDateString()}
                     `;
+                    document.getElementById('article-content').innerHTML = post.content || '<p>No content available.</p>';
                 } else {
-                    document.getElementById('full-post-content').innerHTML = `
-                        <section class="container" style="padding: 4rem 2rem; text-align: center;">
-                            <div class="glass-card" style="padding: 4rem; max-width: 600px; margin: 0 auto;">
-                                <h2 style="color: white;">Article Not Found</h2>
-                                <p style="color: rgba(255,255,255,0.8);">The requested article could not be loaded.</p>
-                                <a href="/newsroom" class="btn" style="background: rgba(34,197,94,0.8); color: white; padding: 1rem 2.5rem; border-radius: 30px; text-decoration: none; display: inline-block; margin-top: 1rem;">← Back to Newsroom</a>
-                            </div>
-                        </section>
-                    `;
+                    showError('Article Not Found', 'The requested article could not be loaded.');
                 }
             } catch (e) {
-                document.getElementById('full-post-content').innerHTML = `
-                    <section class="container" style="padding: 4rem 2rem; text-align: center;">
-                        <div class="glass-card" style="padding: 4rem; max-width: 600px; margin: 0 auto;">
-                            <h2 style="color: white;">Error Loading Article</h2>
-                            <p style="color: rgba(255,255,255,0.8);">Please try again later.</p>
-                            <a href="/newsroom" class="btn" style="background: rgba(34,197,94,0.8); color: white; padding: 1rem 2.5rem; border-radius: 30px; text-decoration: none; display: inline-block; margin-top: 1rem;">← Back to Newsroom</a>
-                        </div>
-                    </section>
-                `;
+                showError('Error Loading Article', 'Please try again later.');
             }
+        }
+
+        function showError(title, message) {
+            document.getElementById('article-container').innerHTML = `
+                <section class="section-padding text-center">
+                    <div class="container">
+                        <div class="glass-card" style="padding: 4rem; max-width: 600px; margin: 0 auto;">
+                            <h2 style="color: #111827; margin-bottom: 1rem;">${title}</h2>
+                            <p style="color: #6b7280; margin-bottom: 2rem;">${message}</p>
+                            <a href="/newsroom" class="btn-primary">&larr; Back to Newsroom</a>
+                        </div>
+                    </div>
+                </section>
+            `;
         }
 
         window.addEventListener('load', loadFullPost);
     </script>
 </body>
 </html>
+

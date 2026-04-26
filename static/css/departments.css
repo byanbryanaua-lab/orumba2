@@ -5,6 +5,52 @@
   --dept-hero-height: 70vh;
   --dept-card-padding: 2.5rem;
   --dept-grid-gap: 2rem;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'DM Serif Display', Georgia, 'Times New Roman', serif;
+}
+
+/* Base typography for departments page */
+.departments-section {
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.departments-section h1,
+.departments-section h2,
+.departments-section h3 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.departments-section h1 {
+  line-height: 1.1;
+}
+
+.departments-section h2 {
+  line-height: 1.15;
+}
+
+.departments-section h3 {
+  line-height: 1.2;
+}
+
+.departments-section p,
+.departments-section .hod-name,
+.departments-section .hod-email {
+  font-family: var(--font-body);
+}
+
+.departments-section .hod-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.departments-section .hod-email {
+  font-weight: 400;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
 }
 
 /* Hero Section */
@@ -103,14 +149,16 @@
 .dept-icon {
   font-size: 5rem;
   margin-bottom: 1.5rem;
-  opacity: 0.9;
+  opacity: 1;
+  fill: #000;
+  color: #000;
   transition: all 0.4s ease;
 }
 
 .dept-card:hover .dept-icon {
   opacity: 1;
   transform: scale(1.1);
-  filter: drop-shadow(0 0 20px rgba(0,0,0,0.3));
+  filter: drop-shadow(0 0 15px rgba(0,0,0,0.2));
 }
 
 .dept-card h3 {
@@ -274,33 +322,181 @@
   transform: translateY(0);
 }
 
-/* Responsive */
+/* Mobile Responsive */
 @media (max-width: 768px) {
+  :root {
+    --dept-hero-height: 45vh;
+    --dept-card-padding: 1.5rem;
+    --dept-grid-gap: 1rem;
+  }
+
   .departments-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
-    padding: 3rem 1rem;
+    gap: var(--dept-grid-gap);
+    padding: 2rem 0.75rem;
+    max-width: 100%;
   }
-  
+
+  .departments-section h2 {
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .departments-section h2::after {
+    width: 60px;
+    height: 3px;
+  }
+
   .dept-hero-content h1 {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
+    line-height: 1.2;
   }
-  
+
+  .dept-hero-content p {
+    font-size: 1rem;
+  }
+
   .dept-card {
-    padding: 2rem 1.5rem;
+    padding: var(--dept-card-padding);
+    border-radius: 16px;
+  }
+
+  .dept-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .dept-card h3 {
+    font-size: 1.4rem;
+  }
+
+  .dept-card p {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .hod-avatar {
+    width: 56px;
+    height: 56px;
+    border-width: 2px;
+  }
+
+  .hod-name {
+    font-size: 0.95rem;
+  }
+
+  .hod-email {
+    font-size: 0.8rem;
+  }
+
+  .modal-content {
+    padding: 1.5rem;
+    width: 92%;
+    border-radius: 16px;
+  }
+
+  .modal-header h2 {
+    font-size: 1.6rem;
+  }
+
+  .modal-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-close {
+    top: 0.75rem;
+    right: 1rem;
+    font-size: 2rem;
+    width: 40px;
+    height: 40px;
   }
 }
 
 @media (max-width: 480px) {
+  :root {
+    --dept-hero-height: 38vh;
+    --dept-card-padding: 1.25rem;
+  }
+
+  .dept-hero-content h1 {
+    font-size: 1.5rem;
+  }
+
+  .dept-hero-content p {
+    font-size: 0.9rem;
+  }
+
+  .departments-section h2 {
+    font-size: 1.6rem;
+  }
+
+  .dept-card {
+    padding: var(--dept-card-padding);
+    border-radius: 14px;
+  }
+
+  .dept-icon {
+    font-size: 3rem;
+  }
+
+  .dept-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .dept-card p {
+    font-size: 0.88rem;
+  }
+
+  .hod-avatar {
+    width: 48px;
+    height: 48px;
+  }
+
+  .modal-content {
+    padding: 1.25rem;
+    width: 95%;
+  }
+
+  .modal-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .modal-description {
+    font-size: 0.95rem;
+  }
+
   .modal-actions {
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+    gap: 0.75rem;
   }
-  
+
   .modal-btn {
     width: 100%;
-    max-width: 280px;
     justify-content: center;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+  :root {
+    --dept-card-padding: 1rem;
+  }
+
+  .dept-hero-content h1 {
+    font-size: 1.3rem;
+  }
+
+  .departments-section h2 {
+    font-size: 1.4rem;
+  }
+
+  .dept-icon {
+    font-size: 2.5rem;
   }
 }
 

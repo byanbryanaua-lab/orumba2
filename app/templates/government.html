@@ -3,182 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Government Structure - Orumba North LGA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/glassmorphism.css">
+    <meta name="description" content="Government structure of Orumba North LGA — Executive, Legislative, Supervisors, and Department Heads.">
+    <title>Government — Orumba North LGA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/global-theme.css">
-    <link rel="stylesheet" href="/static/css/header-enhancements.css">
+    <link rel="stylesheet" href="/static/css/navbar.css">
+    <link rel="stylesheet" href="/static/css/mobile-global.css">
     <style>
-        .gov-hero { height: 100vh; position: relative; overflow: hidden; }
-        .gov-container { max-width: 1400px; margin: 0 auto; padding: 6rem 2rem; }
-        .tabs-nav { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 4rem; }
-        .tab-btn { padding: 1rem 2.5rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); color: #000; border-radius: 50px; cursor: pointer; transition: all 0.3s; font-weight: 600; }
-        .tab-btn:hover, .tab-btn.active { background: rgba(255,255,255,0.25); transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+        .gov-hero {
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: -75px;
+            padding-top: 75px;
+            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.6)), url('/static/images/orumba-header-bakground-image2.jpg') center/cover no-repeat;
+            color: white;
+            text-align: center;
+        }
+        .gov-hero h1 { font-size: var(--text-4xl); font-weight: 800; margin-bottom: 0.75rem; text-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+        .gov-hero p { font-size: var(--text-lg); opacity: 0.95; max-width: 700px; margin: 0 auto 1.5rem; }
+
+        .tabs-nav {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+        .tab-btn {
+            padding: 0.75rem 1.5rem;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .tab-btn:hover, .tab-btn.active {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
         .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeInUp 0.8s ease-out; }
-        .gov-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
-        .gov-card { background: rgba(255,255,255,0.12) !important; backdrop-filter: blur(35px) !important; border: 1px solid rgba(255,255,255,0.25) !important; border-radius: 24px; padding: 3rem 2rem; text-align: center; transition: all 0.4s; position: relative; overflow: hidden; }
-        .gov-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #22c55e, #16a34a); opacity: 0; transition: opacity 0.3s; }
-        .gov-card:hover { transform: translateY(-12px); box-shadow: 0 30px 80px rgba(0,0,0,0.25) !important; }
+        .tab-content.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .gov-card {
+            padding: 2.5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+        .gov-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
         .gov-card:hover::before { opacity: 1; }
-        .gov-avatar { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin: 0 auto 1.5rem; border: 4px solid rgba(255,255,255,0.5); box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
-        .gov-icon { width: 80px; height: 80px; margin: 0 auto 2rem; opacity: 0.9; }
-        .gov-h3 { font-size: 1.6rem; margin-bottom: 0.8rem; color: #000; }
-        .gov-role { color: #666; font-weight: 500; margin-bottom: 1rem; }
-        .fade-in-up { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
-        .fade-in-up.animate { opacity: 1; transform: translateY(0); }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-        @media (max-width: 768px) { .tabs-nav { flex-direction: column; align-items: center; gap: 1rem; } }
+        .gov-avatar {
+            width: 120px; height: 120px; border-radius: 50%;
+            background: linear-gradient(135deg, rgba(34,197,94,0.15), rgba(22,163,74,0.15));
+            border: 3px solid rgba(34,197,94,0.3);
+            margin: 0 auto 1.25rem;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.5rem; color: #16a34a;
+        }
+        .gov-card h3 { font-size: var(--text-xl); color: #111827; margin-bottom: 0.5rem; }
+        .gov-role { color: #16a34a; font-weight: 600; font-size: 0.95rem; margin-bottom: 0.75rem; }
+        .gov-card p { color: #4b5563; line-height: 1.7; font-size: var(--text-base); }
     </style>
 </head>
 <body>
     {% include '_header.html' %}
 
-    <!-- Hero Section -->
-    <section class="gov-hero fade-in-up">
-        <div class="hero-bg" style="background: url('/static/images/orumba-header-bakground-image2.jpg'); background-size: cover; background-position: center; height: 100%;"></div>
-        <div class="glass-hero" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; max-width: 90%;">
-            <h1 style="font-size: 4.5rem; color: #fff; text-shadow: 0 4px 20px rgba(0,0,0,0.5);">Government Structure</h1>
-            <p style="font-size: 1.5rem; color: rgba(255,255,255,0.95); margin: 1.5rem 0 3rem;">Executive • Legislative • Supervisors • Department Heads</p>
-            <a href="/government/administration" class="tab-btn" style="font-size: 1.2rem; padding: 1.2rem 3rem;">View Leadership</a>
+    <section class="gov-hero">
+        <div class="container">
+            <h1>Government Structure</h1>
+            <p>A transparent, accountable, and people-focused administration serving all 10 wards of Orumba North.</p>
+            <a href="/government/administration" class="btn-primary" style="background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3); padding: 0.875rem 2rem; border-radius: 50px; color: white; text-decoration: none; font-weight: 600; display: inline-block;">View Administration</a>
         </div>
     </section>
 
-    <!-- Tabs Section -->
-    <section class="gov-container">
-        <div class="tabs-nav">
-            <button class="tab-btn active" data-tab="executive">Executive Arm</button>
-            <button class="tab-btn" data-tab="legislative">Legislative Arm</button>
-            <button class="tab-btn" data-tab="supervisors">Supervisors</button>
-            <button class="tab-btn" data-tab="hods">Department Heads</button>
-        </div>
-
-        <!-- Executive Tab -->
-        <div id="executive" class="tab-content active">
-            <div class="gov-grid">
-                <div class="gov-card fade-in-up">
-
-                    <div class="gov-avatar-placeholder" style="width: 140px; height: 140px; border-radius: 50%; background: linear-gradient(135deg, rgba(34,197,94,0.2), rgba(22,163,74,0.2)); border: 4px solid rgba(255,255,255,0.5); margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #22c55e;">👤</div>
-                    <h3 class="gov-h3">Capt Barr Casmir-Nwafor Chinonso rtd</h3>
-
-                    <p class="gov-role">Executive Chairman</p>
-                    <p>Chief executive officer responsible for policy implementation and development initiatives</p>
-                </div>
-                <div class="gov-card fade-in-up" style="animation-delay: 0.1s;">
-
-                    <div class="gov-avatar-placeholder" style="width: 140px; height: 140px; border-radius: 50%; background: linear-gradient(135deg, rgba(34,197,94,0.2), rgba(22,163,74,0.2)); border: 4px solid rgba(255,255,255,0.5); margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #22c55e;">👤</div>
-                    <h3 class="gov-h3">Hon. [Vice Chairman Name]</h3>
-
-                    <p class="gov-role">Vice Chairman</p>
-                    <p>Deputy executive overseeing community engagement and women's affairs</p>
-                </div>
-                <div class="gov-card fade-in-up" style="animation-delay: 0.2s;">
-
-                    <div class="gov-avatar-placeholder" style="width: 140px; height: 140px; border-radius: 50%; background: linear-gradient(135deg, rgba(34,197,94,0.2), rgba(22,163,74,0.2)); border: 4px solid rgba(255,255,255,0.5); margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #22c55e;">👤</div>
-                    <h3 class="gov-h3">Hon. [Secretary Name]</h3>
-
-                    <p class="gov-role">Secretary to LGA</p>
-                    <p>Head of administration coordinating all government operations</p>
-                </div>
+    <section class="section-padding">
+        <div class="container">
+            <div class="tabs-nav">
+                <button class="tab-btn active" data-tab="executive">Executive Arm</button>
+                <button class="tab-btn" data-tab="legislative">Legislative Arm</button>
+                <button class="tab-btn" data-tab="supervisors">Supervisors</button>
+                <button class="tab-btn" data-tab="hods">Department Heads</button>
             </div>
-        </div>
 
-        <!-- Legislative Tab -->
-        <div id="legislative" class="tab-content">
-            <div class="gov-grid">
-                <div class="gov-card fade-in-up">
-                    <svg class="gov-icon" viewBox="0 0 24 24" fill="#22c55e">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                    </svg>
-                    <h3 class="gov-h3">10 Ward Councilors</h3>
-                    <p class="gov-role">Legislative Arm</p>
-                    <p>Representatives from each of 10 wards making laws and approving budgets</p>
-                </div>
-                <div class="gov-card fade-in-up" style="animation-delay: 0.1s;">
-                    <svg class="gov-icon" viewBox="0 0 24 24" fill="#22c55e">
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                    </svg>
-                    <h3 class="gov-h3">Council Leader</h3>
-                    <p class="gov-role">Presiding Officer</p>
-                    <p>Leads council meetings and legislative business coordination</p>
-                </div>
-                <div class="gov-card fade-in-up" style="animation-delay: 0.2s;">
-                    <img src="/static/images/orumbamember4.jpg" alt="Councilor" class="gov-avatar" style="width: 100px; height: 100px;">
-                    <h3 class="gov-h3">Hon. Emeka Umeh</h3>
-                    <p class="gov-role">Ward A Councilor</p>
-                    <p>Sample ward representative serving community interests</p>
-                </div>
+            <div id="executive" class="tab-content active">
+                <div class="grid-responsive-3">
+                    <div class="glass-card gov-card">
+                        <div class="gov-avatar">&#128100;</div>
+                        <h3>Hon. Barr. Casmir Chinonso Nwafor</h3>
+                        <p class="gov-role">Executive Chairman</p>
+                        <p>Chief executive officer responsible for policy implementation, strategic planning, and development initiatives across all 10 wards.</p>
+                    </div>
+                    <div class="glass-card gov-card">
+                        <div class="gov-avatar">&#128100;</div>
+                        <h3>Hon. Ifesinachi Chukwurah</h3>
+                        <p class="gov-role">Vice Chairman</p>
+                        <p>Deputy executive overseeing community engagement, women's empowerment, and social welfare programmes.</p>
+                    </div>
+                    <div class="glass-card gov-card">
+                        <div class="gov-avatar">&#128100;</div>
+                        <h3>Secretary to the LGA</h3>
+                        <p class="gov-role">Head of Administration</p>
+                        <p>Coordinates all government operations, manages records, and ensures seamless inter-departmental communication.</p>
+                    </div>
             </div>
-        </div>
 
-        <!-- Supervisors Tab -->
-        <div id="supervisors" class="tab-content">
-            <div class="gov-grid">
-                <div class="gov-card fade-in-up">
-                    <svg class="gov-icon" viewBox="0 0 24 24" fill="#22c55e">
-                        <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 1.99-.89 1.99-2L22 8c0-1.11-.89-2-2-2zm0 12H4V8h16v10zm-9.5-2c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zM13.5 8c.83 0 1.5-.67 1.5-1.5S14.33 5 13.5 5s-1.5.67-1.5 1.5S12.67 8 13.5 8z"/>
-                    </svg>
-                    <h3 class="gov-h3">Health Supervisor</h3>
-                    <p class="gov-role">Public Health</p>
-                    <p>Primary healthcare centers, disease prevention, vaccination drives</p>
-                </div>
-                <div class="gov-card fade-in-up" style="animation-delay: 0.1s;">
-                    <svg class="gov-icon" viewBox="0 0 24 24" fill="#22c55e">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                    </svg>
-                    <h3 class="gov-h3">Education Supervisor</h3>
-                    <p class="gov-role">Schools & Training</p>
-                    <p>School infrastructure, teacher welfare, adult literacy programs</p>
-                </div>
-                <div class="gov-card fade-in-up" style="animation-delay: 0.2s;">
-                    <svg class="gov-icon" viewBox="0 0 24 24" fill="#22c55e">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                    </svg>
-                    <h3 class="gov-h3">Works Supervisor</h3>
-                    <p class="gov-role">Infrastructure</p>
-                    <p>Road maintenance, drainage systems, public building construction</p>
-                </div>
+            <div id="legislative" class="tab-content">
+                <div class="grid-responsive-3">
+                    <div class="glass-card gov-card">
+                        <div class="gov-avatar">&#128101;</div>
+                        <h3>10 Ward Councilors</h3>
+                        <p class="gov-role">Legislative Arm</p>
+                        <p>Elected representatives from each of the 10 wards who make laws, approve budgets, and ensure grassroots participation.</p>
+                    </div>
+                    <div class="glass-card gov-card">
+                        <div class="gov-avatar">&#128100;</div>
+                        <h3>Hon. Williams Omenuko</h3>
+                        <p class="gov-role">Council Leader</p>
+                        <p>Presiding officer of the legislative council, coordinating meetings and legislative business.</p>
+                    </div>
+                    <div class="glass-card gov-card">
+                        <div class="gov-avatar">&#128100;</div>
+                        <h3>Hon. Nwankwo Ikenna Kenneth</h3>
+                        <p class="gov-role">Deputy Leader</p>
+                        <p>Supports the council leader in legislative functions and represents council interests at executive meetings.</p>
+                    </div>
             </div>
-        </div>
 
-        <!-- HODs Tab -->
-        <div id="hods" class="tab-content">
-            <div class="gov-grid">
-                <div class="gov-card fade-in-up">
-                    <svg class="gov-icon" viewBox="0 0 24 24" fill="#22c55e">
-                        <path d="M12 17c3.31 0 6-2.69 6-6 0-.98-.23-1.9-.64-2.73l1.54-1.54c.56.92.89 2 .89 3.27 0 3.31-2.69 6-6 6-.98 0-1.9.23-2.73.64l-1.54 1.54C10.1 16.77 11.02 17 12 17zm0-12c-3.31 0-6 2.69-6 6 0 .98.23 1.9.64 2.73l-1.54 1.54c-.56-.92-.89-2-.89-3.27 0-3.31 2.69-6 6-6 .98 0 1.9.23 2.73.64l1.54-1.54C13.9 5.23 12.98 5 12 5z"/>
-                    </svg>
-                    <h3 class="gov-h3">ICT Director</h3>
-                    <p class="gov-role">Technology & Innovation</p>
-                    <p>Digital services, website management, data systems modernization</p>
-                </div>
-                <div class="gov-card fade-in-up" style="animation-delay: 0.1s;">
-                    <svg class="gov-icon" viewBox="0 0 24 24" fill="#22c55e">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM13 17h-2v-6h2v6zm0-8h-2V7h2v1z"/>
-                    </svg>
-                    <h3 class="gov-h3">Finance Director</h3>
-                    <p class="gov-role">Budget & Accounts</p>
-                    <p>Financial planning, revenue collection, audit compliance</p>
-                </div>
-                <div class="gov-card fade-in-up" style="animation-delay: 0.2s;">
-                    <svg class="gov-icon" viewBox="0 0 24 24" fill="#22c55e">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                    </svg>
-                    <h3 class="gov-h3">HR Director</h3>
-                    <p class="gov-role">Personnel Management</p>
-                    <p>Staff recruitment, training programs, welfare administration</p>
-                </div>
+            <div id="supervisors" class="tab-content">
+                <div class="grid-responsive-3">
+                    <div class="glass-card gov-card">
+                        <div class="gov-avatar">&#127973;</div>
+                        <h3>Hon. Mrs Christiana Nwankwo</h3>
+                        <p class="gov-role">Health Supervisor</p>
+                        <p>Oversees primary healthcare centres, vaccination programmes, and public health initiatives across the LGA.</p>
+                    </div>
+                    <div class="glass-card gov-card">
+                        <div class="gov-avatar">&#127979;</div>
+                        <h3>Education Supervisor</h3>
+                        <p class="gov-role">Schools &amp; Training</p>
+                        <p>Manages school infrastructure, teacher welfare, scholarships, and adult literacy programmes.</p>
+                    </div>
+                    <div class="glass-card gov-card">
+                        <div class="gov-avatar">&#128679;</div>
+                        <h3>Engr. Austin Ganco O.</h3>
+                        <p class="gov-role">Works Supervisor</p>
+                        <p>Coordinates road maintenance, drainage systems, and public building construction projects.</p>
+                    </div>
             </div>
-            <div style="text-align: center; margin-top: 4rem;">
-                <a href="/departments" class="tab-btn" style="font-size: 1.1rem;">All 10 Departments →</a>
-            </div>
+
+            <div id="hods" class="tab-content">
+                <div class="grid-responsive-3">
+                    <div class="glass-card gov-card">
+                        <div class="gov-avatar">&#128187;</div>
+                        <h3>ICT Director</h3>
+                        <p class="gov-role">Technology &amp; Innovation</p>
+                        <p>Drives digital transformation, e-governance platforms, and data systems modernisation.</p>
+                    </div>
+                    <div class="glass-card gov-card">
+                        <div class="gov-avatar">&#128176;</div>
+                        <h3>Finance Director</h3>
+                        <p class="gov-role">Budget &amp; Accounts</p>
+                        <p>Manages financial planning, revenue collection, and audit compliance for all departments.</p>
+                    </div>
+                    <div class="glass-card gov-card">
+                        <div class="gov-avatar">&#128101;</div>
+                        <h3>HR Director</h3>
+                        <p class="gov-role">Personnel Management</p>
+                        <p>Handles staff recruitment, training programmes, and welfare administration.</p>
+                    </div>
+                <div class="text-center" style="margin-top: 3rem;">
+                    <a href="/departments" class="btn-primary" style="padding: 0.875rem 2rem;">All 10 Departments &rarr;</a>
+                </div>
         </div>
     </section>
 
     {% include '_footer.html' %}
 
     <script>
-        // Tab functionality
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -188,15 +207,20 @@
             });
         });
 
-        // Scroll animations
-        const observer = new IntersectionObserver((entries) => {
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animate');
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
             });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            revealObserver.observe(card);
         });
-        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>

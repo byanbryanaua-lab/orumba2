@@ -2,242 +2,473 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - Orumba North</title>
-    <link rel="stylesheet" href="/static/css/glassmorphism.css">
-    <link rel="stylesheet" href="/static/css/profile-glass.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
+    <meta name="description" content="Your Orumba North LGA profile dashboard.">
+    <title>Profile — Orumba North LGA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/global-theme.css">
-    <link rel="stylesheet" href="/static/css/header-enhancements.css">
-    <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"></script>
+    <link rel="stylesheet" href="/static/css/navbar.css">
+    <link rel="stylesheet" href="/static/css/mobile-global.css">
+    <style>
+        body {
+            background: #f0f4f0;
+            min-height: 100vh;
+            padding-top: 80px;
+            padding-bottom: 2rem;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            color: #111827;
+        }
+
+        .profile-layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem;
+            gap: 1.5rem;
+        }
+
+        .profile-sidebar {
+            width: 260px;
+            flex-shrink: 0;
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            height: fit-content;
+            position: sticky;
+            top: 90px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        .profile-sidebar .user-info {
+            text-align: center;
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .profile-sidebar .user-info h2 {
+            color: #111827;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        .profile-sidebar .user-info small {
+            color: #4b5563;
+            font-size: 0.85rem;
+        }
+
+        .sidebar-nav { list-style: none; padding: 0; margin: 0; }
+        .sidebar-nav li { margin-bottom: 0.25rem; }
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: #374151;
+            text-decoration: none;
+            border-radius: var(--radius);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background: rgba(34,197,94,0.12);
+            color: #15803d;
+        }
+        .sidebar-nav a span { font-size: 1.1rem; }
+
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 1000;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(34,197,94,0.4);
+        }
+
+        .profile-main { flex: 1; min-width: 0; }
+        .profile-main .panel {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .profile-main .panel.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .profile-main h1, .profile-main h2 {
+            color: #111827;
+            margin-bottom: 1.5rem;
+            font-size: var(--text-xl);
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .stat-box {
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        .stat-box .number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #15803d;
+            display: block;
+        }
+        .stat-box .label { color: #374151; font-size: 0.85rem; margin-top: 0.25rem; }
+
+        .content-card {
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        .content-card h3 { color: #111827; margin-bottom: 0.5rem; font-size: 1rem; }
+        .content-card p { color: #374151; font-size: 0.9rem; line-height: 1.5; }
+
+        .btn-glass {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+        .btn-glass.primary {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            box-shadow: 0 4px 15px rgba(34,197,94,0.3);
+        }
+        .btn-glass.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(34,197,94,0.4);
+        }
+        .btn-glass.secondary {
+            background: #f3f4f6;
+            color: #111827;
+            border: 1px solid #d1d5db;
+        }
+        .btn-glass.secondary:hover { background: #e5e7eb; }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .quick-actions .action-card {
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            text-align: center;
+            text-decoration: none;
+            color: #111827;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        .quick-actions .action-card:hover {
+            transform: translateY(-4px);
+            background: #f9fafb;
+        }
+        .quick-actions .action-card .icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+        .quick-actions .action-card h3 { font-size: 1rem; margin: 0; color: #111827; }
+
+        .glass-form .form-group { margin-bottom: 1.25rem; }
+        .glass-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #111827;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .glass-form input,
+        .glass-form select,
+        .glass-form textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius);
+            border: 1px solid #d1d5db;
+            background: white;
+            color: #111827;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            box-sizing: border-box;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+        .glass-form input:focus,
+        .glass-form select:focus,
+        .glass-form textarea:focus {
+            outline: none;
+            border-color: #22c55e;
+            box-shadow: 0 0 0 3px rgba(34,197,94,0.2);
+        }
+        .glass-form input::placeholder { color: #9ca3af; }
+
+        @media (max-width: 768px) {
+            .profile-layout { flex-direction: column; padding: 1rem; }
+            .profile-sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                width: 280px;
+                z-index: 999;
+                border-radius: 0;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                overflow-y: auto;
+            }
+            .profile-sidebar.open { transform: translateX(0); }
+            .sidebar-toggle { display: flex; align-items: center; justify-content: center; }
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                inset: 0;
+                background: rgba(0,0,0,0.5);
+                z-index: 998;
+            }
+            .sidebar-overlay.open { display: block; }
+            .stats-row { grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+            .stat-box { padding: 1rem 0.5rem; }
+            .stat-box .number { font-size: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            body { padding-top: 70px; }
+            .stats-row { grid-template-columns: 1fr; }
+            .section-header { flex-direction: column; align-items: flex-start; }
+            .quick-actions { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
-<body class="profile-page">
+<body>
     {% include '_header.html' %}
-    
-    <div class="profile-container">
-        <nav class="glass-sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <h2 id="user-name">Loading...</h2>
-                <small id="user-role">Citizen</small>
+
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">&#9776;</button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="profile-layout">
+        <aside class="profile-sidebar" id="profileSidebar">
+            <div class="user-info">
+                <h2 id="userName">Loading...</h2>
+                <small id="userRole">Citizen</small>
             </div>
             <ul class="sidebar-nav">
-                <li><a href="#" data-section="dashboard" class="nav-link active"><span>📊</span> Dashboard</a></li>
-                <li><a href="#" data-section="posts"><span>📰</span> My Posts</a></li>
-                <li><a href="#" data-section="albums"><span>📸</span> Albums</a></li>
-                <li><a href="#" data-section="events"><span>📅</span> Events</a></li>
-                <li class="dropdown">
-                    <a href="#" data-section="create" class="nav-link"><span>➕</span> Create New ▼</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/create-post">📰 Create Post</a></li>
-                        <li><a href="/create-album">📸 Create Album</a></li>
-                    </ul>
-                </li>
-                {% if session.role == 'admin' %}
-                <li><a href="#" data-section="admin"><span>⚙️</span> Admin</a></li>
-                {% endif %}
-                <li><a href="#" data-section="settings"><span>⚙️</span> Settings</a></li>
-                <li><a href="#" id="logout-btn"><span>🚪</span> Logout</a></li>
+                <li><a href="#" data-panel="dashboard" class="nav-link active"><span>&#128202;</span> Dashboard</a></li>
+                <li><a href="#" data-panel="posts"><span>&#128240;</span> My Posts</a></li>
+                <li><a href="#" data-panel="albums"><span>&#128247;</span> Albums</a></li>
+                <li><a href="#" data-panel="events"><span>&#128197;</span> Events</a></li>
+                <li><a href="#" data-panel="create"><span>&#10133;</span> Create New</a></li>
+                <li><a href="#" data-panel="settings"><span>&#9881;</span> Settings</a></li>
+                <li><a href="#" id="logoutBtn"><span>&#128682;</span> Logout</a></li>
             </ul>
-        </nav>
-        
-        <main class="main-panel">
+        </aside>
+
+        <main class="profile-main">
             <!-- Dashboard -->
-            <div id="dashboard" class="section active">
-                <div class="glass-card">
-                    <h1>Welcome to your Dashboard</h1>
-                    <div class="stats-grid">
-                        <div class="stat-card glass-card">
-                            <div class="stat-number" id="stat-posts">0</div>
-                            <div class="stat-label">Posts</div>
-                        </div>
-                        <div class="stat-card glass-card">
-                            <div class="stat-number" id="stat-albums">0</div>
-                            <div class="stat-label">Albums</div>
-                        </div>
-                        <div class="stat-card glass-card">
-                            <div class="stat-number" id="stat-events">0</div>
-                            <div class="stat-label">Events</div>
-                        </div>
+            <div id="dashboard" class="panel active">
+                <h1>Dashboard</h1>
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <span class="number" id="statPosts">0</span>
+                        <div class="label">Posts</div>
                     </div>
-                    <div class="recent-activity glass-card">
-                        <h3>Recent Activity</h3>
-                        <ul id="activity-list"></ul>
+                    <div class="stat-box">
+                        <span class="number" id="statAlbums">0</span>
+                        <div class="label">Albums</div>
+                    </div>
+                    <div class="stat-box">
+                        <span class="number" id="statEvents">0</span>
+                        <div class="label">Events</div>
                     </div>
                 </div>
+                <div class="content-card">
+                    <h3>Recent Activity</h3>
+                    <p id="activityList">No recent activity to display.</p>
+                </div>
             </div>
-            
+
             <!-- My Posts -->
-            <div id="posts" class="section">
-                <div class="glass-card">
-                    <div class="section-header">
-                        <h2>My Posts</h2>
-                        <button class="btn-glass" id="create-post-btn">+ New Post</button>
+            <div id="posts" class="panel">
+                <div class="section-header">
+                    <h2>My Posts</h2>
+                    <a href="/create-post" class="btn-glass primary">+ New Post</a>
+                </div>
+                <div id="postsGrid">
+                    <div class="content-card">
+                        <p style="color: #374151; text-align: center; padding: 2rem 0;">No posts yet. Create your first post!</p>
                     </div>
-                    <div class="content-grid" id="posts-grid"></div>
                 </div>
             </div>
-            
+
             <!-- Albums -->
-            <div id="albums" class="section">
-                <div class="glass-card">
-                    <div class="section-header">
-                        <h2>My Albums</h2>
-                        <button class="btn-glass" id="create-album-btn">+ New Album</button>
+            <div id="albums" class="panel">
+                <div class="section-header">
+                    <h2>My Albums</h2>
+                    <a href="/create-album" class="btn-glass primary">+ New Album</a>
+                </div>
+                <div id="albumsGrid">
+                    <div class="content-card">
+                        <p style="color: #374151; text-align: center; padding: 2rem 0;">No albums yet. Create your first album!</p>
                     </div>
-                    <div class="content-grid" id="albums-grid"></div>
                 </div>
             </div>
-            
+
             <!-- Events -->
-            <div id="events" class="section">
-                <div class="glass-card">
-                    <div class="section-header">
-                        <h2>My Events</h2>
-                        <button class="btn-glass" id="create-event-btn">+ New Event</button>
+            <div id="events" class="panel">
+                <div class="section-header">
+                    <h2>My Events</h2>
+                    <a href="/create-event" class="btn-glass primary">+ New Event</a>
+                </div>
+                <div id="eventsGrid">
+                    <div class="content-card">
+                        <p style="color: #374151; text-align: center; padding: 2rem 0;">No events yet. Create your first event!</p>
                     </div>
-                    <div class="content-grid" id="events-grid"></div>
                 </div>
             </div>
-            
+
             <!-- Create New -->
-            <div id="create" class="section">
-                <div class="glass-card quick-actions-container">
-                    <h2>Create New Content</h2>
-                    <div class="quick-actions">
-                        <a href="/create-post" class="action-card glass-card">
-                            <div class="action-icon">📰</div>
-                            <h3>New Post</h3>
-                        </a>
-                        <a href="/create-album" class="action-card glass-card">
-                            <div class="action-icon">📸</div>
-                            <h3>New Album</h3>
-                        </a>
-                        <a href="/create-event" class="action-card glass-card">
-                            <div class="action-icon">📅</div>
-                            <h3>New Event</h3>
-                        </a>
-                    </div>
+            <div id="create" class="panel">
+                <h2>Create New Content</h2>
+                <div class="quick-actions">
+                    <a href="/create-post" class="action-card">
+                        <div class="icon">&#128240;</div>
+                        <h3>New Post</h3>
+                    </a>
+                    <a href="/create-album" class="action-card">
+                        <div class="icon">&#128247;</div>
+                        <h3>New Album</h3>
+                    </a>
+                    <a href="/create-event" class="action-card">
+                        <div class="icon">&#128197;</div>
+                        <h3>New Event</h3>
+                    </a>
                 </div>
             </div>
-            
+
             <!-- Settings -->
-            <div id="settings" class="section">
-                <div class="glass-card">
-                    <h2>Profile Settings</h2>
-                    <form class="glass-form" id="settings-form">
+            <div id="settings" class="panel">
+                <h2>Profile Settings</h2>
+                <div class="content-card">
+                    <form class="glass-form" id="settingsForm">
                         <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" class="form-input" id="user-name-input" placeholder="Your full name">
+                            <label for="settingName">Full Name</label>
+                            <input type="text" id="settingName" placeholder="Your full name">
                         </div>
                         <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" class="form-input" id="user-email-input" placeholder="your@email.com">
+                            <label for="settingEmail">Email</label>
+                            <input type="email" id="settingEmail" placeholder="your@email.com">
                         </div>
                         <div class="form-group">
-                            <label>Avatar</label>
-                            <input type="file" id="avatar-upload" accept="image/*">
-                            <div id="avatar-preview"></div>
+                            <label for="settingAvatar">Profile Photo</label>
+                            <input type="file" id="settingAvatar" accept="image/*">
                         </div>
-                        <button type="submit" class="btn-glass full-width">Save Changes</button>
+                        <button type="submit" class="btn-glass primary">Save Changes</button>
                     </form>
                 </div>
             </div>
         </main>
     </div>
-    
-    <!-- Post Editor Modal -->
-    <div id="post-modal" class="glass-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modal-title">Create Post</h3>
-                <button class="modal-close">&times;</button>
-            </div>
-            <form id="post-form" class="glass-form">
-                <div class="form-group">
-                    <input type="text" class="form-input" id="post-title" placeholder="Post Title">
-                </div>
-                <div class="form-group">
-                    <textarea class="form-textarea" id="post-content" rows="8" placeholder="Post content..."></textarea>
-                </div>
-                <div class="form-group">
-                    <input type="file" id="post-image" accept="image/*">
-                </div>
-                <div class="form-group">
-                    <select class="form-select" id="post-category">
-                        <option value="general">General</option>
-                        <option value="news">News</option>
-                        <option value="announcement">Announcement</option>
-                    </select>
-                </div>
-                <label>
-                    <input type="checkbox" id="post-publish" checked> Publish immediately
-                </label>
-                <button type="submit" class="btn-glass">Save Post</button>
-            </form>
-        </div>
-    </div>
-    
-    <!-- Album/Event Modals similar structure -->
-    <div id="album-modal" class="glass-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Create Album</h3>
-                <button class="modal-close">&times;</button>
-            </div>
-            <form id="album-form" class="glass-form">
-                <div class="form-group">
-                    <input type="text" class="form-input" id="album-title" placeholder="Album Title">
-                </div>
-                <div class="form-group">
-                    <input type="file" id="album-images" multiple accept="image/*">
-                    <div id="album-preview"></div>
-                </div>
-                <button type="submit" class="btn-glass">Create Album</button>
-            </form>
-        </div>
-    </div>
-    
-    <div id="event-modal" class="glass-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Create Event</h3>
-                <button class="modal-close">&times;</button>
-            </div>
-            <form id="event-form" class="glass-form">
-                <div class="form-group">
-                    <input type="text" class="form-input" id="event-title" placeholder="Event Title">
-                </div>
-                <div class="form-group">
-                    <input type="datetime-local" class="form-input" id="event-datetime">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-input" id="event-location" placeholder="Location">
-                </div>
-                <div class="form-group">
-                    <textarea class="form-textarea" id="event-description" rows="4" placeholder="Description"></textarea>
-                </div>
-                <input type="file" id="event-image" accept="image/*">
-                <button type="submit" class="btn-glass">Create Event</button>
-            </form>
-        </div>
-    </div>
-    
+
     {% include '_footer.html' %}
-    <script src="/static/js/profile.js"></script>
-    <style>
-        .no-data { text-align: center; color: #666; padding: 2rem; font-style: italic; }
-        .status-badge { padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
-        .status-badge.published { background: rgba(34,197,94,0.2); color: #10b981; }
-        .status-badge.draft { background: rgba(245,158,11,0.2); color: #f59e0b; }
-        .content-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; padding: 1rem 0; }
-        .content-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px 12px 0 0; }
-        .card-body { padding: 1.5rem; }
-        .card-actions { display: flex; gap: 0.5rem; margin-top: 1rem; }
-        .btn-glass { padding: 0.5rem 1rem; border: none; border-radius: 8px; cursor: pointer; font-size: 0.9rem; transition: 0.2s; }
-        .dropdown { position: relative; }
-        .dropdown.open .dropdown-menu { display: block; }
-        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-radius: 12px; min-width: 160px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); list-style: none; padding: 0.5rem 0; z-index: 100; }
-        .dropdown-menu li a { display: block; padding: 0.75rem 1rem; color: #374151; text-decoration: none; }
-        .dropdown-menu li a:hover { background: rgba(59,130,246,0.1); }
-    </style>
+
+    <script>
+        const sidebarLinks = document.querySelectorAll('.sidebar-nav a[data-panel]');
+        const panels = document.querySelectorAll('.panel');
+        const sidebar = document.getElementById('profileSidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        const toggleBtn = document.getElementById('sidebarToggle');
+
+        function showPanel(panelId) {
+            panels.forEach(p => p.classList.remove('active'));
+            document.getElementById(panelId).classList.add('active');
+            sidebarLinks.forEach(l => l.classList.remove('active'));
+            document.querySelector(`[data-panel="${panelId}"]`).classList.add('active');
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
+        }
+
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                showPanel(link.dataset.panel);
+            });
+        });
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('open');
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
+        });
+
+        async function loadStats() {
+            try {
+                const res = await fetch('/api/profile/stats');
+                const data = await res.json();
+                if (data.status === 'success') {
+                    document.getElementById('statPosts').textContent = data.stats.posts || 0;
+                    document.getElementById('statAlbums').textContent = data.stats.albums || 0;
+                    document.getElementById('statEvents').textContent = data.stats.events || 0;
+                }
+            } catch (e) { console.log('Stats unavailable'); }
+        }
+
+        async function loadUser() {
+            try {
+                const res = await fetch('/api/check-auth');
+                const data = await res.json();
+                if (data.authenticated) {
+                    document.getElementById('userName').textContent = data.username || 'User';
+                }
+            } catch (e) { console.log('User info unavailable'); }
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', async (e) => {
+            e.preventDefault();
+            await fetch('/api/logout', { method: 'POST' });
+            window.location.href = '/';
+        });
+
+        window.addEventListener('load', () => {
+            loadUser();
+            loadStats();
+        });
+    </script>
 </body>
 </html>
+

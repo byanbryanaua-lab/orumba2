@@ -3,85 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News & Announcements</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/glassmorphism.css">
+    <meta name="description" content="Official announcements and press releases from Orumba North LGA.">
+    <title>Announcements — Orumba North LGA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/global-theme.css">
-    <link rel="stylesheet" href="/static/css/header-enhancements.css">
+    <link rel="stylesheet" href="/static/css/navbar.css">
+    <link rel="stylesheet" href="/static/css/mobile-global.css">
+    <style>
+        .announce-hero {
+            position: relative;
+            min-height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: -75px;
+            padding-top: 75px;
+            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.6)), url('/static/images/orumba-header-bakground-image3.jpg') center/cover no-repeat;
+            color: white;
+            text-align: center;
+        }
+        .announce-hero h1 { font-size: var(--text-4xl); font-weight: 800; margin-bottom: 0.75rem; text-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+        .announce-hero p { font-size: var(--text-lg); opacity: 0.95; max-width: 700px; margin: 0 auto; }
+
+        .announcement-card {
+            padding: 2rem;
+            border-left: 4px solid #22c55e;
+            height: 100%;
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+        }
+        .announcement-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        }
+        .announcement-card .date {
+            color: #9ca3af;
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+        }
+        .announcement-card h3 {
+            font-size: var(--text-lg);
+            color: #111827;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+        .announcement-card p {
+            color: #4b5563;
+            line-height: 1.6;
+            font-size: var(--text-base);
+        }
+
+        @media (max-width: 768px) {
+            .announce-hero { min-height: 30vh; padding: 5rem 1rem 2rem; }
+            .announce-hero h1 { font-size: var(--text-3xl); }
+            .announcement-card { padding: 1.5rem; }
+        }
+    </style>
 </head>
 <body>
     {% include '_header.html' %}
 
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-bg" style="background: url('/static/images/orumba-header-bakground-image3.jpg'); background-size: cover;"></div>
-        <div class="glass-hero">
-            <h1 class="fade-in-up">📰 News Feed</h1>
-            <p class="fade-in-up">Official announcements and press releases</p>
+    <section class="announce-hero">
+        <div class="container">
+            <h1>&#128240; Announcements</h1>
+            <p>Official announcements, public notices, and press releases from Orumba North Local Government.</p>
         </div>
     </section>
 
-    <!-- Dynamic News from API -->
-    <section class="container" style="padding: 6rem 2rem;">
-        <div id="dynamicNews" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; max-width: 1400px; margin: 0 auto;">
-            <!-- JS populates from /api/public/posts -->
-        </div>
-        <div style="text-align: center; margin-top: 4rem;">
-            <button class="btn" style="background: rgba(255,255,255,0.2); color: white; padding: 1.5rem 3rem; font-size: 1.1rem; border-radius: 50px; border: 1px solid rgba(255,255,255,0.3);" onclick="loadMoreNews()">Load More</button>
+    <section class="section-padding" style="background: #f8fafc;">
+        <div class="container">
+            <div class="grid-responsive-2">
+                <div class="announcement-card">
+                    <div class="date">January 15, 2025</div>
+                    <h3>2025 Budget Approved</h3>
+                    <p>The Executive Council has approved the 2025 budget of &#8358;2.5 billion, with 45% allocated to capital projects including roads, health centres, and school renovations across all 10 wards.</p>
+                </div>
+                <div class="announcement-card">
+                    <div class="date">January 12, 2025</div>
+                    <h3>Free Medical Outreach Success</h3>
+                    <p>Over 5,000 residents received free healthcare services during our weekend outreach programme. The next outreach is scheduled for February across all wards.</p>
+                </div>
+                <div class="announcement-card">
+                    <div class="date">January 10, 2025</div>
+                    <h3>Road Rehabilitation Commences</h3>
+                    <p>25km of strategic roads have been flagged off for rehabilitation. Phase 1 targets the Ihitenesa-Amaetiti and Nanka-Ufuma corridors.</p>
+                </div>
+                <div class="announcement-card">
+                    <div class="date">January 8, 2025</div>
+                    <h3>Digital Skills Training Graduation</h3>
+                    <p>300 youths have successfully completed digital skills training. Certificates were awarded and startup funding announced for top performers.</p>
+                </div>
         </div>
     </section>
 
     {% include '_footer.html' %}
-
-    <script>
-        let allNews = [];
-        let page = 0;
-        const pageSize = 9;
-
-        async function loadNews() {
-            try {
-                const response = await fetch('/api/public/posts');
-                const data = await response.json();
-                if (data.status === 'success') {
-                    allNews = data.posts;
-                    renderNews(allNews.slice(0, pageSize));
-                }
-            } catch (e) {
-                document.getElementById('dynamicNews').innerHTML = '<div class="glass-card" style="text-align: center; padding: 4rem;"><p>News loading temporarily unavailable</p></div>';
-            }
-        }
-
-        function renderNews(posts) {
-            const container = document.getElementById('dynamicNews');
-            container.innerHTML = '';
-
-            posts.forEach(post => {
-                const card = document.createElement('div');
-                card.className = 'glass-card fade-in-up';
-                card.style.padding = '2.5rem';
-                card.innerHTML = `
-                    <div style="color: #22c55e; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem;">${post.username || 'Admin'}</div>
-                    <h2 style="margin-bottom: 1.5rem; line-height: 1.3;">${post.title || post.content.substring(0, 60) + '...'}</h2>
-                    <p style="line-height: 1.7; margin-bottom: 2rem;">${post.content.substring(0, 200)}...</p>
-                    <div style="font-size: 0.9rem; color: #666;">${new Date(post.published_at || Date.now()).toLocaleDateString()}</div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function loadMoreNews() {
-            page++;
-            const nextPosts = allNews.slice(page * pageSize, (page + 1) * pageSize);
-            renderNews([...document.querySelectorAll('.glass-card').length > 0 ? Array.from(document.querySelectorAll('.glass-card')) : [], ...nextPosts]);
-        }
-
-        window.addEventListener('load', loadNews);
-        window.addEventListener('scroll', () => {
-            document.querySelectorAll('.fade-in-up').forEach((el, i) => {
-                const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight - 100) el.classList.add('animate');
-            });
-        });
-    </script>
 </body>
 </html>

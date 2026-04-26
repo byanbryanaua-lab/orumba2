@@ -34,5 +34,23 @@
     "name": "dwightcraig90@gmail.com",
     "email": "",
     "avatar": ""
+  },
+  {
+    "username": "kayce",
+    "password": "07e511433b5ea32e66dc8335016d7521a527c3857340f21196df8433bc04288a",
+    "id": 1,
+    "role": "citizen",
+    "name": "kayce",
+    "email": "",
+    "avatar": ""
+  },
+  {
+    "username": "marscorto1@gmail.com",
+    "password": "6d68231a2ac44da1a12c7ce439308d7799da9a1582f049c0b46ad4a0eb79c72d",
+    "id": 1,
+    "role": "citizen",
+    "name": "marscorto1@gmail.com",
+    "email": "",
+    "avatar": ""
   }
 ]

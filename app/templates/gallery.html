@@ -2,283 +2,303 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery - Orumba North LGA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/glassmorphism.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Photo gallery of Orumba North LGA — community events, landmarks, and celebrations.">
+    <title>Gallery — Orumba North LGA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/global-theme.css">
-    <link rel="stylesheet" href="/static/css/header-enhancements.css">
+    <link rel="stylesheet" href="/static/css/navbar.css">
+    <link rel="stylesheet" href="/static/css/mobile-global.css">
     <style>
         body {
-            background: radial-gradient(circle at center, rgba(0,100,0,0.08) 0%, transparent 70%), linear-gradient(135deg, rgba(255,221,87,0.04) 0%, rgba(34,197,94,0.04) 100%);
+            background: radial-gradient(circle at center, rgba(0,100,0,0.06) 0%, transparent 70%),
+                        linear-gradient(135deg, rgba(255,221,87,0.03) 0%, rgba(34,197,94,0.03) 100%);
             min-height: 100vh;
-            padding-top: 75px;
+            padding-top: 70px;
         }
 
-        .main-container {
+        .gallery-hero {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 4rem 2rem 6rem;
-        }
-
-        .page-title {
+            padding: 2.5rem 1rem 2rem;
             text-align: center;
-            font-size: 3.5rem;
-            font-weight: 800;
+        }
+        .gallery-hero-icon {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 4px 16px rgba(34,197,94,0.4));
+        }
+        .gallery-hero h1 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: clamp(2rem, 6vw, 3.2rem);
+            font-weight: 400;
+            line-height: 1.1;
             background: linear-gradient(135deg, #22c55e, #16a34a, #FFD700);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 4rem;
-            letter-spacing: -0.02em;
+            margin: 0 0 0.75rem;
         }
-
-        .page-title::after {
-            content: '';
-            display: block;
+        .gallery-hero p {
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            color: rgba(0,0,0,0.6);
+            max-width: 500px;
+            margin: 0.75rem auto 0;
+            line-height: 1.5;
+        }
+        .gallery-divider {
             height: 4px;
-            width: 120px;
+            width: 100px;
             background: linear-gradient(90deg, #22c55e, #FFD700);
-            margin: 1rem auto 0;
+            margin: 0 auto;
             border-radius: 2px;
-            box-shadow: 0 2px 10px rgba(34,197,94,0.4);
         }
 
         .albums-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem 3rem;
+        }
+        @media (min-width: 640px) {
+            .albums-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1024px) {
+            .albums-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
         }
 
         .album-card {
-            @extend .glass-card;
             position: relative;
-            height: 420px;
+            height: clamp(260px, 42vw, 380px);
+            border-radius: var(--radius-lg);
             overflow: hidden;
             cursor: pointer;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            box-shadow: 0 8px 32px rgba(0,50,0,0.15);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
         }
-
         .album-card:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 25px 70px rgba(0, 50, 0, 0.4), 0 0 30px rgba(34, 197, 94, 0.25);
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 20px 50px rgba(0,50,0,0.3), 0 0 20px rgba(34,197,94,0.2);
         }
-
-        .album-cover {
+        .album-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.4s ease;
         }
-
-        .album-card:hover .album-cover {
-            transform: scale(1.05);
-        }
+        .album-card:hover img { transform: scale(1.05); }
 
         .album-overlay {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(transparent 0%, rgba(0,0,0,0.85) 30%);
+            background: linear-gradient(transparent 0%, rgba(0,0,0,0.75) 40%);
             color: white;
-            padding: 2rem;
-            transform: translateY(100%);
-            transition: transform 0.4s ease 0.1s;
+            padding: 1.25rem;
+        }
+        .album-overlay h3 { font-size: clamp(1.1rem, 3vw, 1.5rem); font-weight: 700; margin-bottom: 0.35rem; }
+        .album-overlay p { font-size: clamp(0.8rem, 2vw, 0.95rem); opacity: 0.9; margin-bottom: 0.4rem; }
+        .album-overlay .stats { display: flex; gap: 1rem; font-size: clamp(0.75rem, 2vw, 0.9rem); opacity: 0.85; }
+
+        @media (hover: hover) and (pointer: fine) {
+            .album-overlay { transform: translateY(100%); transition: transform 0.35s ease 0.05s; }
+            .album-card:hover .album-overlay { transform: translateY(0); }
         }
 
-        .album-card:hover .album-overlay {
-            transform: translateY(0);
-        }
-
-        .album-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
-        }
-
-        .album-author {
-            font-size: 1.1rem;
-            opacity: 0.95;
-            margin-bottom: 0.5rem;
-        }
-
-        .album-stats {
-            display: flex;
-            gap: 1.5rem;
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
-        .album-stats span {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        /* Album Modal - Premium Glass */
         .album-modal {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0,0,0,0.92);
-            backdrop-filter: blur(10px);
+            inset: 0;
+            background: rgba(0,0,0,0.94);
+            backdrop-filter: blur(12px);
             z-index: 10000;
             display: none;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
+            padding: 0;
         }
+        .album-modal.active { display: flex; }
 
-        .album-photos {
-            position: relative;
-            max-width: 95vw;
-            max-height: 95vh;
-            display: flex;
-            align-items: center;
-        }
-
-        .photo-container {
-            position: relative;
-            width: 700px;
-            height: 500px;
-            flex-shrink: 0;
-            border-radius: 24px;
-            overflow: hidden;
-            @extend .glass-card;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-        }
-
-        .photo {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            background: rgba(255,255,255,0.05);
-        }
-
-        .modal-nav {
-            @extend .glass-card;
+        .modal-top-bar {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            border: none;
-            color: white;
-            font-size: 2.5rem;
-            width: 70px;
-            height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(20px);
-        }
-
-        .modal-nav:hover {
-            background: rgba(34,197,94,0.3);
-            transform: translateY(-50%) scale(1.1);
-            box-shadow: 0 15px 40px rgba(34,197,94,0.4);
-        }
-
-        .modal-prev { left: -100px; }
-        .modal-next { right: -100px; }
-
-        .modal-close {
-            @extend .glass-card;
-            position: absolute;
-            top: -70px;
+            top: 0;
+            left: 0;
             right: 0;
-            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            z-index: 10001;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
+        }
+        .modal-counter { color: rgba(255,255,255,0.9); font-size: 0.9rem; font-weight: 500; }
+        .modal-close-btn {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
             color: white;
-            font-size: 2rem;
-            width: 60px;
-            height: 60px;
+            font-size: 1.6rem;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(10px);
+            transition: all 0.25s ease;
+            padding: 0;
         }
+        .modal-close-btn:hover { background: rgba(239,68,68,0.35); transform: scale(1.08); }
 
-        .modal-close:hover {
-            background: rgba(239,68,68,0.3);
-            transform: scale(1.1);
+        .album-photos {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3.5rem 0.5rem 100px;
         }
+        .photo-container {
+            width: 100%;
+            max-width: 900px;
+            height: 100%;
+            max-height: calc(100vh - 160px);
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.03);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .photo-container img { width: 100%; height: 100%; object-fit: contain; }
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            font-size: 1.5rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.25s ease;
+            z-index: 10001;
+            padding: 0;
+        }
+        .modal-nav:hover { background: rgba(34,197,94,0.3); transform: translateY(-50%) scale(1.08); }
+        .modal-prev { left: 0.5rem; }
+        .modal-next { right: 0.5rem; }
 
         .album-thumbs {
             position: absolute;
-            bottom: -100px;
-            left: 50%;
-            transform: translateX(-50%);
+            bottom: 0;
+            left: 0;
+            right: 0;
             display: flex;
-            gap: 15px;
-            padding: 1rem;
-            max-width: 85vw;
+            gap: 10px;
+            padding: 0.75rem 1rem;
             overflow-x: auto;
-            scrollbar-width: thin;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            z-index: 10001;
         }
-
+        .album-thumbs::-webkit-scrollbar { display: none; }
         .thumb {
-            width: 90px;
-            height: 70px;
+            width: 72px;
+            height: 56px;
             object-fit: cover;
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
-            opacity: 0.7;
-            transition: all 0.3s ease;
-            border: 3px solid transparent;
+            opacity: 0.6;
+            transition: all 0.25s ease;
+            border: 2px solid transparent;
             flex-shrink: 0;
         }
+        .thumb:hover, .thumb.active { opacity: 1; border-color: #22c55e; transform: scale(1.08); }
 
-        .thumb:hover, .thumb.active {
-            opacity: 1;
-            border-color: #22c55e;
-            transform: scale(1.15);
-            box-shadow: 0 10px 30px rgba(34,197,94,0.4);
+        @media (min-width: 640px) {
+            .gallery-hero { padding: 3rem 1.5rem 2.5rem; }
+            .gallery-hero-icon { width: 72px; height: 72px; }
+            .albums-grid { padding: 0 1.5rem 4rem; }
+            .album-card { height: clamp(280px, 35vw, 360px); }
+            .album-overlay { padding: 1.5rem; }
+            .modal-nav { width: 52px; height: 52px; font-size: 1.75rem; }
+            .modal-prev { left: 1rem; }
+            .modal-next { right: 1rem; }
+            .album-photos { padding: 4rem 1rem 110px; }
+            .thumb { width: 80px; height: 62px; }
+        }
+        @media (min-width: 1024px) {
+            .gallery-hero { padding: 4rem 2rem 3rem; }
+            .gallery-hero-icon { width: 80px; height: 80px; }
+            .albums-grid { padding: 0 2rem 5rem; }
+            .album-card { height: 380px; border-radius: 24px; }
+            .modal-nav { width: 60px; height: 60px; font-size: 2rem; }
+            .modal-prev { left: 1.5rem; }
+            .modal-next { right: 1.5rem; }
+            .photo-container { border-radius: 24px; }
+            .thumb { width: 90px; height: 68px; border-radius: 12px; }
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .main-container { padding: 2rem 1rem; }
-            .albums-grid { grid-template-columns: 1fr; gap: 2rem; }
-            .photo-container { width: 90vw; height: 60vh; }
-            .modal-nav { font-size: 2rem; width: 60px; height: 60px; }
-            .modal-prev { left: -60px; }
-            .modal-next { right: -60px; }
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            grid-column: 1 / -1;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(15px);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255,255,255,0.2);
         }
+        .empty-state h3 { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.3rem, 4vw, 1.8rem); color: rgba(0,0,0,0.85); margin-bottom: 0.5rem; }
+        .empty-state p { font-size: clamp(0.85rem, 2.5vw, 1rem); color: rgba(0,0,0,0.6); }
     </style>
 </head>
 <body>
     {% include '_header.html' %}
 
-    <main class="main-container">
-        <div class="glass-card fade-in-up text-center py-5" style="backdrop-filter: blur(25px); margin-bottom: 4rem; border-radius: 30px; box-shadow: 0 20px 60px rgba(0,50,0,0.4);">
-            <svg width="80" height="80" viewBox="0 0 24 24" fill="#22c55e" style="margin-bottom: 1.5rem; filter: drop-shadow(0 5px 20px rgba(34,197,94,0.5));">
-                <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-            </svg>
-            <h1 style="font-size: 3.5rem; font-weight: 800; background: linear-gradient(135deg, #22c55e, #16a34a, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0 0 0.5rem; letter-spacing: -0.02em;">Orumba North Gallery</h1>
-            <div style="height: 4px; width: 120px; background: linear-gradient(90deg, #22c55e, #FFD700); margin: 0 auto; border-radius: 2px; box-shadow: 0 2px 10px rgba(34,197,94,0.4);"></div>
-        </div>
-        
+    <div class="gallery-hero">
+        <svg class="gallery-hero-icon" viewBox="0 0 24 24" fill="#22c55e">
+            <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+        </svg>
+        <h1>Orumba North Gallery</h1>
+        <div class="gallery-divider"></div>
+        <p>Explore photos from our vibrant community events and landmarks</p>
+    </div>
+
+    <main>
         <div class="albums-grid" id="albumsGrid">
-            <!-- Album cards loaded here -->
+            <!-- JS populates -->
         </div>
     </main>
 
-    <!-- Album Modal -->
     <div id="albumModal" class="album-modal">
-        <button class="modal-close" onclick="closeAlbumModal()">&times;</button>
-        
+        <div class="modal-top-bar">
+            <span class="modal-counter" id="photoCounter">1 / 1</span>
+            <button class="modal-close-btn" onclick="closeAlbumModal()" aria-label="Close">&times;</button>
+        </div>
         <div class="album-photos">
-            <button class="modal-nav modal-prev" onclick="prevPhoto()">←</button>
+            <button class="modal-nav modal-prev" onclick="prevPhoto()" aria-label="Previous">&#8249;</button>
             <div class="photo-container">
-                <img id="currentPhoto" class="photo" src="" alt="">
+                <img id="currentPhoto" src="" alt="">
             </div>
-            <button class="modal-nav modal-next" onclick="nextPhoto()">→</button>
-            
+            <button class="modal-nav modal-next" onclick="nextPhoto()" aria-label="Next">&#8250;</button>
             <div class="album-thumbs" id="albumThumbs"></div>
         </div>
     </div>
@@ -291,84 +311,96 @@
 
         async function loadAlbums() {
             try {
-                const response = await fetch('/api/albums');
+                const response = await fetch('/api/public/albums');
                 const data = await response.json();
                 if (data.status === 'success' && data.albums.length > 0) {
                     renderAlbumCards(data.albums);
                 } else {
-                    document.getElementById('albumsGrid').innerHTML = `
-                        <div class="glass-card" style="text-align: center; padding: 4rem; grid-column: 1/-1;">
-                            <h3 style="color: rgba(255,255,255,0.9);">No albums available yet</h3>
-                            <p style="color: rgba(255,255,255,0.7);">Check back soon for community photo galleries</p>
-                        </div>
-                    `;
+                    showEmptyState();
                 }
             } catch (error) {
-                console.error('Error:', error);
-                document.getElementById('albumsGrid').innerHTML = `
-                    <div class="glass-card" style="text-align: center; padding: 4rem; grid-column: 1/-1;">
-                        <h3 style="color: rgba(255,255,255,0.9);">Loading albums...</h3>
-                    </div>
-                `;
+                showEmptyState();
             }
+        }
+
+        function showEmptyState() {
+            document.getElementById('albumsGrid').innerHTML = `
+                <div class="empty-state">
+                    <h3>No albums available yet</h3>
+                    <p>Check back soon for community photo galleries</p>
+                </div>
+            `;
         }
 
         function renderAlbumCards(albums) {
             const grid = document.getElementById('albumsGrid');
             grid.innerHTML = '';
-            
             albums.forEach((album, index) => {
                 const card = document.createElement('div');
-                card.className = 'album-card fade-in-up';
-                card.style.animationDelay = `${index * 0.1}s`;
+                card.className = 'album-card';
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
                 card.onclick = () => openAlbumModal(album);
-                
                 const coverImg = album.posts[0]?.image_url || '/static/images/orumba-north-logo.jpg';
                 const numPhotos = album.posts.length;
-                
                 card.innerHTML = `
-                    <img class="album-cover" src="${coverImg}" alt="Album cover" loading="lazy">
+                    <img src="${coverImg}" alt="Album cover" loading="lazy">
                     <div class="album-overlay">
-                        <div class="album-title">Album #${album.id}</div>
-                        <div class="album-author">by Community</div>
-                        <div class="album-stats">
-                            <span>📸 ${numPhotos} photos</span>
-                            <span>⭐ ${Math.round(Math.random()*5)}.0 rating</span>
+                        <h3>Album #${album.id}</h3>
+                        <p>by Community</p>
+                        <div class="stats">
+                            <span>&#128247; ${numPhotos} photo${numPhotos !== 1 ? 's' : ''}</span>
                         </div>
                     </div>
                 `;
                 grid.appendChild(card);
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 80);
             });
         }
 
         function openAlbumModal(album) {
             currentAlbum = album;
             currentPhotoIndex = 0;
-            document.getElementById('albumModal').style.display = 'flex';
+            document.getElementById('albumModal').classList.add('active');
             document.body.style.overflow = 'hidden';
             showCurrentPhoto();
             renderAlbumThumbnails();
+            updateCounter();
         }
 
         function closeAlbumModal() {
-            document.getElementById('albumModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
+            document.getElementById('albumModal').classList.remove('active');
+            document.body.style.overflow = '';
             currentAlbum = null;
         }
 
         function showCurrentPhoto() {
             const photo = document.getElementById('currentPhoto');
             photo.src = currentAlbum.posts[currentPhotoIndex].image_url || '/static/images/orumba-north-logo.jpg';
-            photo.alt = `Photo ${currentPhotoIndex + 1}`;
+            photo.alt = `Photo ${currentPhotoIndex + 1} of ${currentAlbum.posts.length}`;
+            updateCounter();
+        }
+
+        function updateCounter() {
+            const counter = document.getElementById('photoCounter');
+            if (counter && currentAlbum) {
+                counter.textContent = `${currentPhotoIndex + 1} / ${currentAlbum.posts.length}`;
+            }
         }
 
         function prevPhoto() {
+            if (!currentAlbum) return;
             currentPhotoIndex = (currentPhotoIndex - 1 + currentAlbum.posts.length) % currentAlbum.posts.length;
             showCurrentPhoto();
             updateThumbActive();
         }
 
         function nextPhoto() {
+            if (!currentAlbum) return;
             currentPhotoIndex = (currentPhotoIndex + 1) % currentAlbum.posts.length;
             showCurrentPhoto();
             updateThumbActive();
@@ -377,12 +409,12 @@
         function renderAlbumThumbnails() {
             const thumbsContainer = document.getElementById('albumThumbs');
             thumbsContainer.innerHTML = '';
-            
             currentAlbum.posts.forEach((post, index) => {
                 const thumb = document.createElement('img');
                 thumb.className = 'thumb';
                 thumb.src = post.image_url || '/static/images/orumba-north-logo.jpg';
                 thumb.alt = `Thumbnail ${index + 1}`;
+                thumb.loading = 'lazy';
                 thumb.onclick = (e) => {
                     e.stopPropagation();
                     currentPhotoIndex = index;
@@ -395,15 +427,29 @@
         }
 
         function updateThumbActive() {
-            const thumbs = document.querySelectorAll('.thumb');
-            thumbs.forEach((thumb, index) => {
+            document.querySelectorAll('.thumb').forEach((thumb, index) => {
                 thumb.classList.toggle('active', index === currentPhotoIndex);
+                if (index === currentPhotoIndex) {
+                    thumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                }
             });
         }
 
-        // Event listeners
-        document.getElementById('albumModal').addEventListener('click', (e) => {
-            if (e.target.id === 'albumModal') closeAlbumModal();
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const modal = document.getElementById('albumModal');
+        modal.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+        modal.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) nextPhoto();
+                else prevPhoto();
+            }
+        }, { passive: true });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal || e.target.closest('.album-photos') === e.target) closeAlbumModal();
         });
 
         document.addEventListener('keydown', (e) => {
@@ -413,17 +459,6 @@
             if (e.key === 'Escape') closeAlbumModal();
         });
 
-        // Scroll animations
-        window.addEventListener('scroll', () => {
-            document.querySelectorAll('.fade-in-up').forEach(el => {
-                const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight * 0.8) {
-                    el.style.animationPlayState = 'running';
-                }
-            });
-        });
-
-        // Load albums on page load
         window.addEventListener('load', loadAlbums);
     </script>
 </body>

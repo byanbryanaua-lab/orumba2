@@ -505,6 +505,10 @@ def serve_gallery():
 def serve_newsroom():
     return render_template('newsroom.html')
 
+@app.route('/upcoming-events')
+def serve_upcoming_events():
+    return render_template('upcoming-events.html')
+
 @app.route('/post/<int:post_id>')
 def serve_post(post_id):
     return render_template('post.html')
