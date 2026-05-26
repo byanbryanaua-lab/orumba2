@@ -101,9 +101,22 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   document.addEventListener('click', (e) => {
-    if (!e.target.closest('.header-glass.navbar')) {
-      closeMenu();
-    }
+    // Keep drawer open when interacting with anything inside the navbar/header
+    // (dropdown taps/clicks can trigger the document handler otherwise).
+    if (!e.target.closest('.header-glass.navbar')) return;
+
+    // If user clicked on a dropdown toggle or dropdown menu item, don't close.
+    if (e.target.closest('.dropdown')) return;
+    if (e.target.closest('.dropdown-menu')) return;
+
+    // Otherwise, close when clicking outside main drawer toggle elements.
+    // (This still allows navigation to work.)
+  });
+
+  // Close drawer when clicking outside the navbar/header completely.
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.header-glass.navbar')) return;
+    closeMenu();
   });
 
   navList.querySelectorAll('li:not(.dropdown) > a').forEach(link => {
