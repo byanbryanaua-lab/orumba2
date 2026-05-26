@@ -1,23 +1,18 @@
-# Orumba North LGA Styling Fix - Task Tracker
+# Project TODO
 
-## Current Status: 🔍 Diagnosing Live Site Issues
+- [x] Inspect Flask entrypoints/routes and deployment configs (`app.py`, `wsgi.py`, `api/index.py`, `render.yaml`, `vercel.json`).
+- [x] Identify global deployment misrouting risk: Render/Vercel configured to route to `api/index.py` instead of Flask WSGI.
+- [x] Create `TODO-global-deployment-fix.md` to track the global deployment fixes.
+- [x] Fix `vercel.json` to build/route using `wsgi.py` (instead of `api/index.py`).
 
-### Steps Completed ✅
-1. ✅ [Done] Confirmed all CSS files return 404 on live site (curl tests)
-2. ✅ [Done] Identified SCSS `@extend` syntax errors in CSS files
-3. ✅ [Done] Read `app.py`, `vercel.json`, templates, and CSS files
-4. ✅ [Done] Confirmed Flask static serving configuration is correct locally
+- [x] Confirm `render.yaml` is valid YAML/has correct indentation and correct gunicorn target.
 
-### Remaining Steps ⏳
-```
-1. **Fix SCSS syntax errors** (remove @extend from CSS files)
-2. **Test local server** (`python app.py` - verify static files load)
-3. **Update vercel.json** (add static caching headers)
-4. **Commit changes** to `blackboxai/fix-vercel-static-files` 
-5. **Redeploy** and test live site
-6. **Verify styling** on https://www.orumbanorthgov.org/
-```
+- [x] Fix/verify `wsgi.py` export name matches gunicorn target.
 
-### Next Action
-Fix `static/css/glassmorphism.css` and `static/css/global-theme.css` SCSS syntax errors
+
+- [ ] Deploy and verify key paths:
+
+  - [ ] `GET /` returns homepage
+  - [ ] `GET /api/public/posts` returns JSON
+  - [ ] `GET /static/css/...` returns 200
 

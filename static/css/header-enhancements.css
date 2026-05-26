@@ -1,4 +1,17 @@
-/* DISABLED FOR MOBILE NAVBAR FIX - Conflicts with navbar.css */\n\n.header-glass.navbar,\n.hamburger,\n.nav-container,\n.nav-list,\n.nav-menu,\n.nav-title-mobile,\n.dropdown,\n.dropdown-menu {\n  display: none !important;\n}\n\n/* Premium Futuristic Navbar - Centered 15% margins */
+/* DISABLED FOR MOBILE NAVBAR FIX - Conflicts with navbar.css */
+
+.header-glass.navbar,
+.hamburger,
+.nav-container,
+.nav-list,
+.nav-menu,
+.nav-title-mobile,
+.dropdown,
+.dropdown-menu {
+  display: none !important;
+}
+
+/* Premium Futuristic Navbar - Centered 15% margins */
 .header-glass.navbar {
     position: fixed;
     top: 7vh;
@@ -159,7 +172,7 @@
     transform: translateY(0) !important;
     z-index: 10000 !important;
     top: calc(100% + 2px) !important;
-    box-shadow: 0 25px 80px rgba(0, 100, 0, 0.5), 0 0 40px rgba(34, 197, 94, 0.3) !important;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), 0 0 40px rgba(34, 197, 94, 0.3) !important;
 }
 
 .dropdown-menu li a {
@@ -363,7 +376,6 @@
     transform: translateX(8px);
     box-shadow: 0 5px 20px var(--glow-green);
 }
-
 
 /* Hamburger Animation */
 .hamburger {
