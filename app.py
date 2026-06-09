@@ -7,7 +7,14 @@ from functools import wraps
 
 from app.db import db
 
-app = Flask(__name__, static_folder=os.path.abspath(os.path.join(os.path.dirname(__file__), 'static')), static_url_path='/static', template_folder='app/templates')
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+app = Flask(
+    __name__,
+    static_folder=os.path.join(BASE_DIR, 'static'),
+    static_url_path='/static',
+    template_folder=os.path.join(BASE_DIR, 'app', 'templates'),
+)
 app.secret_key = os.environ.get('SECRET_KEY') or secrets.token_hex(24)
 
 posts = []
