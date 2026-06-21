@@ -17,6 +17,11 @@ app = Flask(
 )
 app.secret_key = os.environ.get('SECRET_KEY') or secrets.token_hex(24)
 
+# Ensure session cookies persist on Vercel/HTTPS.
+# (Works locally too; Vercel will provide HTTPS.)
+app.config.setdefault('SESSION_COOKIE_SAMESITE', 'lax')
+app.config.setdefault('SESSION_COOKIE_SECURE', True)
+
 posts = []
 users = []
 events = []
